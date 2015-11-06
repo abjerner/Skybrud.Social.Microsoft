@@ -1,9 +1,23 @@
 Skybrud.Social.Microsoft
 ========================
 
-As this is an experimental project, it won't be released on NuGet or similar for now. You can however [**grab a build from Dropbox**](https://www.dropbox.com/sh/ubak1qionvji8mf/AACY2DjhldUXVhTpc3X8b8oXa/Skybrud.Social.Microsoft%20-%20Build%200.0.1.2%20%282015-09-12%29?dl=0) or download the repository and build the `Skybrud.Social.Microsoft` project.
+As an add-on for [Skybrud.Social](https://github.com/abjerner/Skybrud.Social), *Skybrud.Social.Microsoft* helps you with both authentication as well as raw and object-oriented communication with various Microsoft APIs such as Windows Live and OneDrive.
 
-## Usage
+### Installation
+
+As this is an experimental project, it won't be released on NuGet or similar for now. You can however [**grab a build from Dropbox**][Dropbox] or download the repository and build the `Skybrud.Social.Microsoft` project.
+
+### Found a bug? Have a question?
+
+* Please feel free to [**create an issue**][Issues], and I will get back to you ;)
+
+### Documentation
+
+While there currently isn't any documentation available, you will be able to find it in the future at the [**Skybrud.Social website**][Website].
+
+Meanwhile you can have a look at the examples below for getting started:
+
+#### Usage
 
 ##### Initializing a new OAuth client
 
@@ -230,3 +244,13 @@ In the example below, I've tried to demonstrate how a login page can be implemen
     
 }
 ```
+
+
+
+
+[Website]: http://social.skybrud.dk/microsoft/
+[NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social.Microsoft
+[GitHubRelease]: https://github.com/abjerner/Skybrud.Social.Microsoft/releases/latest
+[Dropbox]: https://www.dropbox.com/sh/ubak1qionvji8mf/AACY2DjhldUXVhTpc3X8b8oXa/Skybrud.Social.Microsoft%20-%20Build%200.0.1.2%20%282015-09-12%29?dl=0
+[Changelog]: https://github.com/abjerner/Skybrud.Social.Microsoft/blob/master/CHANGELOG.md
+[Issues]: https://github.com/abjerner/Skybrud.Social.Microsoft/issues
