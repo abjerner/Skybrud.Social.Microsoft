@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.0.1.0")]
 [assembly: AssemblyInformationalVersion("0.0.1.0")]
-//[assembly: SkybrudMetadata("StartDate", "2015-09-11")]
+[assembly: AssemblyMetadata("StartDate", "2015-09-11")]
