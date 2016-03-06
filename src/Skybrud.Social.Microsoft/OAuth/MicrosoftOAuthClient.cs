@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Net;
+using Skybrud.Social.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Social.Microsoft.Responses.Authentication;
 using Skybrud.Social.Microsoft.Scopes;
@@ -8,7 +8,7 @@ using Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw;
 
 namespace Skybrud.Social.Microsoft.OAuth {
     
-    public class MicrosoftOAuthClient {
+    public class MicrosoftOAuthClient : SocialHttpClient {
 
         #region Properties
 
@@ -61,6 +61,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
         public MicrosoftOAuthClient(string accessToken) : this() {
+            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException("accessToken");
             AccessToken = accessToken;
         }
 
@@ -69,29 +70,9 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
-        public MicrosoftOAuthClient(long clientId, string clientSecret) : this() {
-            ClientId = clientId + "";
-            ClientSecret = clientSecret;
-        }
-
-        /// <summary>
-        /// Initializes an OAuth client with the specified client ID, client secret and return URI.
-        /// </summary>
-        /// <param name="clientId">The ID of the client.</param>
-        /// <param name="clientSecret">The secret of the client.</param>
-        /// <param name="redirectUri">The redirect URI of the client.</param>
-        public MicrosoftOAuthClient(long clientId, string clientSecret, string redirectUri) : this() {
-            ClientId = clientId + "";
-            ClientSecret = clientSecret;
-            RedirectUri = redirectUri;
-        }
-
-        /// <summary>
-        /// Initializes an OAuth client with the specified client ID and client secret.
-        /// </summary>
-        /// <param name="clientId">The ID of the client.</param>
-        /// <param name="clientSecret">The secret of the client.</param>
         public MicrosoftOAuthClient(string clientId, string clientSecret) : this() {
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException("clientId");
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException("clientSecret");
             ClientId = clientId;
             ClientSecret = clientSecret;
         }
@@ -103,6 +84,9 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="clientSecret">The secret of the client.</param>
         /// <param name="redirectUri">The redirect URI of the client.</param>
         public MicrosoftOAuthClient(string clientId, string clientSecret, string redirectUri) : this() {
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException("clientId");
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException("clientSecret");
+            if (String.IsNullOrWhiteSpace(redirectUri)) throw new ArgumentNullException("redirectUri");
             ClientId = clientId;
             ClientSecret = clientSecret;
             RedirectUri = redirectUri;
@@ -129,13 +113,32 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="scope">The scope of the application.</param>
         /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
-            return String.Format(
-                "https://login.live.com/oauth20_authorize.srf?client_id={0}&scope={1}&response_type=code&redirect_uri={2}&state={3}",
-                ClientId,
-                String.Join(" ", scope),
-                RedirectUri,
-                state
-            );
+
+            // Some validation
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
+
+            // Do we have a valid "state" ?
+            if (String.IsNullOrWhiteSpace(state)) {
+                throw new ArgumentNullException("state", "A valid state should be specified as it is part of the security of OAuth 2.0.");
+            }
+
+            // Construct the query string
+            NameValueCollection query = new NameValueCollection {
+                {"client_id", ClientId},
+                {"redirect_uri", RedirectUri},
+                {"response_type", "code"},
+                {"state", state}
+            };
+
+            // Append the scope (if specified)
+            if (scope != null && scope.Length > 0) {
+                query.Add("scope", String.Join(" ", scope));
+            }
+
+            // Construct thr authorization URL
+            return "https://login.live.com/oauth20_authorize.srf?" + SocialUtils.NameValueCollectionToQueryString(query);
+
         }
 
         /// <summary>
@@ -144,6 +147,12 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="authCode">The authorization code received from the Microsoft OAuth dialog.</param>
         /// <returns>Returns an access token based on the specified <code>authCode</code>.</returns>
         public MicrosoftTokenResponse GetAccessTokenFromAuthCode(string authCode) {
+
+            // Some validation
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
+            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException("ClientSecret");
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
+            if (String.IsNullOrWhiteSpace(authCode)) throw new ArgumentNullException("authCode");
 
             // Initialize the POST data
             NameValueCollection data = new NameValueCollection {
@@ -155,13 +164,10 @@ namespace Skybrud.Social.Microsoft.OAuth {
             };
 
             // Make the call to the API
-            HttpWebResponse response = SocialUtils.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
-
-            // Wrap the native response class
-            SocialHttpResponse social = SocialHttpResponse.GetFromWebResponse(response);
+            SocialHttpResponse response = SocialUtils.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
 
             // Parse the response
-            return MicrosoftTokenResponse.ParseResponse(social);
+            return MicrosoftTokenResponse.ParseResponse(response);
 
         }
 
@@ -171,6 +177,12 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="refreshToken">The refresh token of the user.</param>
         /// <returns>Returns an access token based on the specified <code>refreshToken</code>.</returns>
         public MicrosoftTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
+
+            // Some validation
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
+            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException("ClientSecret");
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
+            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException("refreshToken");
 
             // Initialize the POST data
             NameValueCollection data = new NameValueCollection {
@@ -182,51 +194,24 @@ namespace Skybrud.Social.Microsoft.OAuth {
             };
 
             // Make the call to the API
-            HttpWebResponse response = SocialUtils.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
-
-            // Wrap the native response class
-            SocialHttpResponse social = SocialHttpResponse.GetFromWebResponse(response);
+            SocialHttpResponse response = SocialUtils.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
 
             // Parse the response
-            return MicrosoftTokenResponse.ParseResponse(social);
+            return MicrosoftTokenResponse.ParseResponse(response);
 
         }
 
         /// <summary>
-        /// Makes an authenticated GET request to the specified URL. The access token is automatically appended to the query string.
+        /// Virtual method that can be used for configuring a request.
         /// </summary>
-        /// <param name="url">The URL to call.</param>
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
-            return DoAuthenticatedGetRequest(url, default(SocialQueryString));
-        }
-
-        /// <summary>
-        /// Makes an authenticated GET request to the specified URL. The access token is automatically appended to the query string.
-        /// </summary>
-        /// <param name="url">The URL to call.</param>
-        /// <param name="query">The query string for the call.</param>
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {
-
-            // Initialize a new SocialQueryString if NULL
-            if (query == null) query = new SocialQueryString();
+        /// <param name="request">The instance of <see cref="SocialHttpRequest"/> representing the request.</param>
+        protected override void PrepareHttpRequest(SocialHttpRequest request) {
 
             // Append the access token to the query string if present in the client and not already
             // specified in the query string
-            if (!query.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
-                query.Add("access_token", AccessToken);
+            if (!request.QueryString.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
+                request.QueryString.Add("access_token", AccessToken);
             }
-
-            // Configure the request
-            SocialHttpRequest request = new SocialHttpRequest {
-                Method = "GET",
-                Url = url,
-                QueryString = query
-            };
-
-            // Set headers of the request
-
-            // Make a call to the API
-            return request.GetResponse();
 
         }
 

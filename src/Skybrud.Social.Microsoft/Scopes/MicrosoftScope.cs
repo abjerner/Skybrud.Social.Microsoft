@@ -25,7 +25,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new scope based on the specified <code>name</code> a.
+        /// Initializes a new scope based on the specified <code>name</code>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
         public MicrosoftScope(string name) {
@@ -79,11 +79,12 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Operators
 
         /// <summary>
-        /// Adding two instances of <code>MicrosoftScope</code> will result in a
-        /// <code>MicrosoftScopeCollection</code> containing both scopes.
+        /// Adding two instances of <see cref="MicrosoftScope"/> will result in a
+        /// <see cref="MicrosoftScopeCollection"/> containing both scopes.
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>
+        /// <returns>Returns a new collection based on <code>left</code> and <code>right</code>.</returns>
         public static MicrosoftScopeCollection operator +(MicrosoftScope left, MicrosoftScope right) {
             return new MicrosoftScopeCollection(left, right);
         }

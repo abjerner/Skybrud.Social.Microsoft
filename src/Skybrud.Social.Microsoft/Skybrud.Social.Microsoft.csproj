@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Skybrud.Social, Version=0.9.4.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.Social.0.9.4.1\lib\net40\Skybrud.Social.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Skybrud.Social.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.Social.Core.1.0.0-beta1\lib\net45\Skybrud.Social.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -43,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\MicrosoftException.cs" />
     <Compile Include="MicrosoftService.cs" />
     <Compile Include="OAuth\MicrosoftOAuthClient.cs" />
     <Compile Include="Objects\Authentication\MicrosoftTokenResponseBody.cs" />
+    <Compile Include="Objects\MicrosoftObject.cs" />
     <Compile Include="OneDrive\Scopes\OneDriveScopes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfoGenerated.cs" />
@@ -58,7 +64,7 @@
     <Compile Include="WindowsLive\Endpoints\WindowsLiveEndpoint.cs" />
     <Compile Include="WindowsLive\Endpoints\Raw\WindowsLiveRawEndpoint.cs" />
     <Compile Include="WindowsLive\Objects\Users\WindowsLiveUser.cs" />
-    <Compile Include="WindowsLive\Responses\WindowsLiveUserResponse.cs" />
+    <Compile Include="WindowsLive\Responses\WindowsLiveGetUserResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

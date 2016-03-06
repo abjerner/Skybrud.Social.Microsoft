@@ -55,9 +55,14 @@ namespace Skybrud.Social.Microsoft {
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         public static MicrosoftService CreateFromAccessToken(string accessToken) {
+
+            // Some validation
+            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException("accessToken");
+            
             return CreateFromOAuthClient(new MicrosoftOAuthClient {
                 AccessToken = accessToken
             });
+        
         }
 
         /// <summary>
@@ -67,6 +72,11 @@ namespace Skybrud.Social.Microsoft {
         /// <param name="clientSecret">The client secret.</param>
         /// <param name="refreshToken">The refresh token of the user.</param>
         public static MicrosoftService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
+
+            // Some validation
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException("clientId");
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException("clientSecret");
+            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException("refreshToken");
 
             // Initialize a new OAuth client
             MicrosoftOAuthClient client = new MicrosoftOAuthClient(clientId, clientSecret);

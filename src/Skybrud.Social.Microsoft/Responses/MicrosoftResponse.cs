@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using Skybrud.Social.Http;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Microsoft.Responses {
 
@@ -27,15 +26,8 @@ namespace Skybrud.Social.Microsoft.Responses {
             // Skip error checking if the server responds with an OK status code
             if (response.StatusCode == HttpStatusCode.OK) return;
 
-            // Get the "meta" object
-            JsonObject obj = response.GetBodyAsJsonObject();
-
             // Now throw some exceptions
             throw new Exception("WTF?");
-            //int code = obj.GetInt32("code");
-            //string type = obj.GetString("error_type");
-            //string message = obj.GetString("error_message") ?? obj.GetString("error");
-            //throw new BasecampException(response, code, type, message);
 
         }
 

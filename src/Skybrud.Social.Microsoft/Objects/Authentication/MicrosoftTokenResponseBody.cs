@@ -1,5 +1,6 @@
 ﻿using System;
-using Skybrud.Social.Json;
+using Newtonsoft.Json.Linq;
+using Skybrud.Social.Json.Extensions.JObject;
 using Skybrud.Social.Microsoft.Scopes;
 
 namespace Skybrud.Social.Microsoft.Objects.Authentication {
@@ -7,7 +8,7 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
     /// <summary>
     /// Class representing the response body of a call to get a refresh token or an access token.
     /// </summary>
-    public class MicrosoftTokenResponseBody : SocialJsonObject {
+    public class MicrosoftTokenResponseBody : MicrosoftObject {
 
         #region Properties
 
@@ -59,17 +60,18 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
 
         #region Constructors
 
-        private MicrosoftTokenResponseBody(JsonObject obj) : base(obj) { }
+        private MicrosoftTokenResponseBody(JObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>MicrosoftTokenResponseBody</code> from the specified <code>JsonObject</code>.
+        /// Parses the specified <code>obj</code> into an instance of <see cref="MicrosoftTokenResponseBody"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
-        public static MicrosoftTokenResponseBody Parse(JsonObject obj) {
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="MicrosoftTokenResponseBody"/>.</returns>
+        public static MicrosoftTokenResponseBody Parse(JObject obj) {
             
             if (obj == null) return null;
 
@@ -83,7 +85,7 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
             // Parse the rest of the response
             return new MicrosoftTokenResponseBody(obj) {
                 TokenType = obj.GetString("token_type"),
-                ExpiresIn = TimeSpan.FromSeconds(obj.GetInt32("expires_in")),
+                ExpiresIn = obj.GetDouble("expires_in", TimeSpan.FromSeconds),
                 Scope = scopes,
                 AccessToken = obj.GetString("access_token"),
                 AuthenticationToken = obj.GetString("authentication_token"),

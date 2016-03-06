@@ -1,9 +1,11 @@
-﻿using System;
-using Skybrud.Social.Json;
+﻿using Newtonsoft.Json.Linq;
+using Skybrud.Social.Json.Extensions.JObject;
+using Skybrud.Social.Microsoft.Objects;
+using Skybrud.Social.Time;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
     
-    public class WindowsLiveUser : SocialJsonObject {
+    public class WindowsLiveUser : MicrosoftObject {
 
         #region Properties
 
@@ -23,35 +25,35 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
 
         public string Locale { get; private set; }
 
-        public DateTime? UpdatedTime { get; private set; }
+        public SocialDateTime UpdatedTime { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        private WindowsLiveUser(JsonObject obj) : base(obj) { }
+        private WindowsLiveUser(JObject obj) : base(obj) {
+            Id = obj.GetString("id");
+            Name = obj.GetString("name");
+            FirstName = obj.GetString("first_name");
+            LastName = obj.GetString("last_name");
+            Gender = obj.GetString("gender");
+            Link = obj.GetString("link");
+            Emails = obj.GetObject("emails", WindowsLiveUserEmailsInfo.Parse);
+            Locale = obj.GetString("locale");
+            UpdatedTime = obj.GetString("updated_time", SocialDateTime.Parse);
+        }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>WindowsLiveUser</code> from the specified <code>JsonObject</code>.
+        /// Parses the specified <code>obj</code> into an instance of <see cref="WindowsLiveUser"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
-        public static WindowsLiveUser Parse(JsonObject obj) {
-            if (obj == null) return null;
-            return new WindowsLiveUser(obj) {
-                Id = obj.GetString("id"),
-                Name = obj.GetString("name"),
-                FirstName = obj.GetString("first_name"),
-                LastName = obj.GetString("last_name"),
-                Gender = obj.GetString("gender"),
-                Link = obj.GetString("link"),
-                Emails = obj.GetObject("emails", WindowsLiveUserEmailsInfo.Parse),
-                Locale = obj.GetString("locale"),
-                UpdatedTime = obj.HasValue("updated_time") ? obj.GetString("updated_time", DateTime.Parse) : (DateTime?) null
-            };
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="WindowsLiveUser"/>.</returns>
+        public static WindowsLiveUser Parse(JObject obj) {
+            return obj == null ? null : new WindowsLiveUser(obj);
         }
 
         #endregion

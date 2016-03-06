@@ -37,8 +37,18 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        public WindowsLiveUserResponse GetSelf() {
-            return WindowsLiveUserResponse.ParseResponse(Raw.GetSelf());
+        /// <returns>Returns an instance of <see cref="WindowsLiveGetUserResponse"/> representing the response.</returns>
+        public WindowsLiveGetUserResponse GetSelf() {
+            return WindowsLiveGetUserResponse.ParseResponse(Raw.GetSelf());
+        }
+
+        /// <summary>
+        /// Gets information about the user with the specified <code>userId</code>.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <returns>Returns an instance of <see cref="WindowsLiveGetUserResponse"/> representing the response.</returns>
+        public WindowsLiveGetUserResponse GetUser(string userId) {
+            return WindowsLiveGetUserResponse.ParseResponse(Raw.GetSelf());
         }
 
         #endregion
