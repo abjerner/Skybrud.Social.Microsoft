@@ -1,0 +1,10 @@
+{
+  "title": "Skybrud.Social.Microsoft",
+  "description": "Authentication and service implementation for the various Microsoft APIs.",
+  "company": "Skybrud.dk",
+  "product": "Skybrud.Social",
+  "copyright": "Copyright © 2015",
+  "version": "0.0.1.0",
+  "informationalVersion": "0.0.1.0",
+  "fileVersion": "0.0.177.4"
+}
