@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
-using Skybrud.Social.Json.Extensions.JObject;
+using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Time;
 using Skybrud.Social.Microsoft.Objects;
-using Skybrud.Social.Time;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
     
@@ -25,7 +25,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
 
         public string Locale { get; private set; }
 
-        public SocialDateTime UpdatedTime { get; private set; }
+        public EssentialsDateTime UpdatedTime { get; private set; }
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
             Link = obj.GetString("link");
             Emails = obj.GetObject("emails", WindowsLiveUserEmailsInfo.Parse);
             Locale = obj.GetString("locale");
-            UpdatedTime = obj.GetString("updated_time", SocialDateTime.Parse);
+            UpdatedTime = obj.GetString("updated_time", EssentialsDateTime.Parse);
         }
 
         #endregion

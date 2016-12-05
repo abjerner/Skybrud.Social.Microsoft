@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using Skybrud.Social.Json.Extensions.JObject;
+using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.Microsoft.Objects;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {

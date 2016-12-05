@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Skybrud.Social.Exceptions;
+using Skybrud.Essentials.Common;
 using Skybrud.Social.Http;
 using Skybrud.Social.Microsoft.Responses.Authentication;
 using Skybrud.Social.Microsoft.Scopes;
@@ -137,7 +137,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             }
 
             // Construct thr authorization URL
-            return "https://login.live.com/oauth20_authorize.srf?" + SocialUtils.NameValueCollectionToQueryString(query);
+            return "https://login.live.com/oauth20_authorize.srf?" + SocialUtils.Misc.NameValueCollectionToQueryString(query);
 
         }
 
@@ -164,7 +164,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             };
 
             // Make the call to the API
-            SocialHttpResponse response = SocialUtils.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
+            SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
 
             // Parse the response
             return MicrosoftTokenResponse.ParseResponse(response);
@@ -194,7 +194,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             };
 
             // Make the call to the API
-            SocialHttpResponse response = SocialUtils.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
+            SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
 
             // Parse the response
             return MicrosoftTokenResponse.ParseResponse(response);
