@@ -1,6 +1,6 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Skybrud.Social.Http;
+using Skybrud.Social.Microsoft.Exceptions;
 
 namespace Skybrud.Social.Microsoft.Responses {
 
@@ -27,7 +27,7 @@ namespace Skybrud.Social.Microsoft.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Now throw some exceptions
-            throw new Exception("WTF?");
+            throw new MicrosoftException(response);
 
         }
 
