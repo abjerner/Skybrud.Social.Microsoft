@@ -39,9 +39,8 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).Spotify.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(SolutionName).xml</DocumentationFile>
   </PropertyGroup>
-
   
   <Target Name="PreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(RunBuildTargets)'=='true'">
     <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2015-09-11 /projectPath=&quot;$(SolutionDir)Skybrud.Social.Microsoft\Skybrud.Social.Microsoft.csproj&quot;" />
