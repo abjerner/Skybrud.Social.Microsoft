@@ -20,9 +20,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// <summary>
         /// Gets an array of all the scopes added to the collection.
         /// </summary>
-        public MicrosoftScope[] Items {
-            get { return _list.ToArray(); }
-        }
+        public MicrosoftScope[] Items => _list.ToArray();
 
         #endregion
 

@@ -17,7 +17,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw {
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public MicrosoftOAuthClient Client { get; private set; }
+        public MicrosoftOAuthClient Client { get; }
 
         #endregion
 
@@ -45,7 +45,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw {
         /// <param name="userId">The ID of the user.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetUser(string userId) {
-            if (String.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException("userId");
+            if (String.IsNullOrWhiteSpace(userId)) throw new ArgumentNullException(nameof(userId));
             return Client.DoHttpGetRequest("https://apis.live.net/v5.0/" + userId);
         }
 

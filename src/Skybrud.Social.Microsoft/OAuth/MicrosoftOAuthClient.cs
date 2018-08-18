@@ -47,7 +47,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <summary>
         /// Gets a reference to the raw Windows Live endpoint.
         /// </summary>
-        public WindowsLiveRawEndpoint WindowsLive { get; private set; }
+        public WindowsLiveRawEndpoint WindowsLive { get; }
 
         #endregion
 
@@ -67,7 +67,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
         public MicrosoftOAuthClient(string accessToken) : this() {
-            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException("accessToken");
+            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
             AccessToken = accessToken;
         }
 
@@ -78,8 +78,8 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
         public MicrosoftOAuthClient(string clientId, string clientSecret) : this() {
-            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException("clientId");
-            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException("clientSecret");
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
             ClientId = clientId;
             ClientSecret = clientSecret;
         }
@@ -92,9 +92,9 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="clientSecret">The secret of the client.</param>
         /// <param name="redirectUri">The redirect URI of the client.</param>
         public MicrosoftOAuthClient(string clientId, string clientSecret, string redirectUri) : this() {
-            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException("clientId");
-            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException("clientSecret");
-            if (String.IsNullOrWhiteSpace(redirectUri)) throw new ArgumentNullException("redirectUri");
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
+            if (String.IsNullOrWhiteSpace(redirectUri)) throw new ArgumentNullException(nameof(redirectUri));
             ClientId = clientId;
             ClientSecret = clientSecret;
             RedirectUri = redirectUri;
@@ -112,6 +112,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="scope">The scope of the application.</param>
         /// <returns>An authorization URL based on <paramref name="state"/> and <paramref name="scope"/>.</returns>
         public string GetAuthorizationUrl(string state, MicrosoftScopeCollection scope) {
+            if (scope == null) throw new ArgumentNullException(nameof(scope));
             return GetAuthorizationUrl(state, scope.ToString());
         }
 
@@ -125,12 +126,12 @@ namespace Skybrud.Social.Microsoft.OAuth {
         public string GetAuthorizationUrl(string state, params string[] scope) {
 
             // Some validation
-            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
-            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException(nameof(RedirectUri));
 
             // Do we have a valid "state" ?
             if (String.IsNullOrWhiteSpace(state)) {
-                throw new ArgumentNullException("state", "A valid state should be specified as it is part of the security of OAuth 2.0.");
+                throw new ArgumentNullException(nameof(state), "A valid state should be specified as it is part of the security of OAuth 2.0.");
             }
 
             // Construct the query string
@@ -159,10 +160,10 @@ namespace Skybrud.Social.Microsoft.OAuth {
         public MicrosoftTokenResponse GetAccessTokenFromAuthCode(string authorizationCode) {
 
             // Some validation
-            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
-            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException("ClientSecret");
-            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
-            if (String.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException("authorizationCode");
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
+            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException(nameof(ClientSecret));
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException(nameof(RedirectUri));
+            if (String.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException(nameof(authorizationCode));
 
             // Initialize the POST data
             IHttpPostData data = new SocialHttpPostData {
@@ -189,10 +190,10 @@ namespace Skybrud.Social.Microsoft.OAuth {
         public MicrosoftTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
 
             // Some validation
-            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
-            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException("ClientSecret");
-            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
-            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException("refreshToken");
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
+            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException(nameof(ClientSecret));
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException(nameof(RedirectUri));
+            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException(nameof(refreshToken));
 
             // Initialize the POST data
             IHttpPostData data = new SocialHttpPostData {

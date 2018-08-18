@@ -15,46 +15,42 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
         /// <summary>
         /// Gets the type of the topen.
         /// </summary>
-        public string TokenType { get; private set; }
+        public string TokenType { get; }
 
         /// <summary>
         /// Gets an instance of <see cref="TimeSpan"/> for when the access token will expire.
         /// </summary>
-        public TimeSpan ExpiresIn { get; private set; }
+        public TimeSpan ExpiresIn { get; }
 
         /// <summary>
         /// Gets a collection of the scopes the user has granted.
         /// </summary>
-        public MicrosoftScopeCollection Scope { get; private set; }
+        public MicrosoftScopeCollection Scope { get; }
 
         /// <summary>
         /// Gets the access token.
         /// </summary>
-        public string AccessToken { get; private set; }
+        public string AccessToken { get; }
 
         /// <summary>
         /// Gets the authentication token.
         /// </summary>
-        public string AuthenticationToken { get; private set; }
+        public string AuthenticationToken { get; }
 
         /// <summary>
         /// Gets the refresh token.
         /// </summary>
-        public string RefreshToken { get; private set; }
+        public string RefreshToken { get; }
 
         /// <summary>
         /// Gets whether a authentication token was specified in the response.
         /// </summary>
-        public bool HasAuthenticationToken {
-            get { return !String.IsNullOrWhiteSpace(AuthenticationToken); }
-        }
+        public bool HasAuthenticationToken => !String.IsNullOrWhiteSpace(AuthenticationToken);
 
         /// <summary>
         /// Gets whether a refresh token was specified in the response.
         /// </summary>
-        public bool HasRefreshToken {
-            get { return !String.IsNullOrWhiteSpace(RefreshToken); }
-        }
+        public bool HasRefreshToken => !String.IsNullOrWhiteSpace(RefreshToken);
 
         #endregion
 

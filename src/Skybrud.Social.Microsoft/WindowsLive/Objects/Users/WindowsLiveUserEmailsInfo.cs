@@ -11,13 +11,13 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
 
         #region Properties
 
-        public string Preferred { get; private set; }
+        public string Preferred { get; }
 
-        public string Account { get; private set; }
+        public string Account { get; }
 
-        public string Personal { get; private set; }
+        public string Personal { get; }
 
-        public string Business { get; private set; }
+        public string Business { get; }
 
         #endregion
 

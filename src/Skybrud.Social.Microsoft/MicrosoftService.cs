@@ -15,12 +15,12 @@ namespace Skybrud.Social.Microsoft {
         /// <summary>
         /// Gets a reference to the internal OAuth client.
         /// </summary>
-        public MicrosoftOAuthClient Client { get; private set; }
+        public MicrosoftOAuthClient Client { get; }
 
         /// <summary>
         /// Gets a reference to the Windows Live endpoint.
         /// </summary>
-        public WindowsLiveEndpoint WindowsLive { get; private set; }
+        public WindowsLiveEndpoint WindowsLive { get; }
 
         #endregion
 
@@ -40,13 +40,8 @@ namespace Skybrud.Social.Microsoft {
         /// </summary>
         /// <param name="client">The OAuth client.</param>
         public static MicrosoftService CreateFromOAuthClient(MicrosoftOAuthClient client) {
-
-            // This should never be null
-            if (client == null) throw new ArgumentNullException("client");
-
-            // Initialize the service
+            if (client == null) throw new ArgumentNullException(nameof(client));
             return new MicrosoftService(client);
-
         }
 
         /// <summary>
@@ -55,14 +50,10 @@ namespace Skybrud.Social.Microsoft {
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         public static MicrosoftService CreateFromAccessToken(string accessToken) {
-
-            // Some validation
-            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException("accessToken");
-            
+            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
             return CreateFromOAuthClient(new MicrosoftOAuthClient {
                 AccessToken = accessToken
             });
-        
         }
 
         /// <summary>
@@ -74,9 +65,9 @@ namespace Skybrud.Social.Microsoft {
         public static MicrosoftService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
 
             // Some validation
-            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException("clientId");
-            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException("clientSecret");
-            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException("refreshToken");
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
+            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException(nameof(refreshToken));
 
             // Initialize a new OAuth client
             MicrosoftOAuthClient client = new MicrosoftOAuthClient(clientId, clientSecret);

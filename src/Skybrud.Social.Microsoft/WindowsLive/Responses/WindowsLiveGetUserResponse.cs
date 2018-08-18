@@ -32,13 +32,8 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Responses {
         /// <param name="response">The response to be parsed.</param>
         /// <returns>An instance of <see cref="WindowsLiveGetUserResponse"/>.</returns>
         public static WindowsLiveGetUserResponse ParseResponse(SocialHttpResponse response) {
-
-            // Some input validation
-            if (response == null) throw new ArgumentNullException("response");
-
-            // Initialize the response object
+            if (response == null) throw new ArgumentNullException(nameof(response));
             return new WindowsLiveGetUserResponse(response);
-
         }
 
         #endregion

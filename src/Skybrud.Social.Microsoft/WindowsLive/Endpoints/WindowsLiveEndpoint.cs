@@ -13,14 +13,12 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints {
         /// <summary>
         /// Gets a reference to the Microsoft service.
         /// </summary>
-        public MicrosoftService Service { get; private set; }
+        public MicrosoftService Service { get; }
 
         /// <summary>
         /// A reference to the raw endpoint.
         /// </summary>
-        public WindowsLiveRawEndpoint Raw {
-            get { return Service.Client.WindowsLive; }
-        }
+        public WindowsLiveRawEndpoint Raw => Service.Client.WindowsLive;
 
         #endregion
 

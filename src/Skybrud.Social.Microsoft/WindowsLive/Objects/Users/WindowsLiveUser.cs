@@ -12,23 +12,23 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
 
         #region Properties
 
-        public string Id { get; private set; }
+        public string Id { get; }
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
-        public string FirstName { get; private set; }
+        public string FirstName { get; }
 
-        public string LastName { get; private set; }
+        public string LastName { get; }
 
-        public string Gender { get; private set; }
+        public string Gender { get; }
 
-        public string Link { get; private set; }
+        public string Link { get; }
 
-        public WindowsLiveUserEmailsInfo Emails { get; private set; }
+        public WindowsLiveUserEmailsInfo Emails { get; }
 
-        public string Locale { get; private set; }
+        public string Locale { get; }
 
-        public EssentialsDateTime UpdatedTime { get; private set; }
+        public EssentialsDateTime UpdatedTime { get; }
 
         #endregion
 

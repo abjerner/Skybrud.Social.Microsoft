@@ -14,12 +14,12 @@ namespace Skybrud.Social.Microsoft.Exceptions {
         /// <summary>
         /// Gets a reference to the underlying <see cref="SocialHttpResponse"/>.
         /// </summary>
-        public SocialHttpResponse Response { get; private set; }
+        public SocialHttpResponse Response { get; }
 
         /// <summary>
         /// Gets the HTTP status code returned by the Microsoft API.
         /// </summary>
-        public HttpStatusCode StatusCode { get; private set; }
+        public HttpStatusCode StatusCode { get; }
 
         #endregion
 

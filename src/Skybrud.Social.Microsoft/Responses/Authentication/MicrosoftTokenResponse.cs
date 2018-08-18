@@ -28,13 +28,8 @@ namespace Skybrud.Social.Microsoft.Responses.Authentication {
         /// <param name="response">The response to be parsed.</param>
         /// <returns>An instance of <see cref="MicrosoftTokenResponse"/>.</returns>
         public static MicrosoftTokenResponse ParseResponse(SocialHttpResponse response) {
-
-            // Some input validation
-            if (response == null) throw new ArgumentNullException("response");
-
-            // Initialize the response object
+            if (response == null) throw new ArgumentNullException(nameof(response));
             return new MicrosoftTokenResponse(response);
-
         }
 
         #endregion
