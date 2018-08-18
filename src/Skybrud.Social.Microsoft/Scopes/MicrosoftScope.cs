@@ -25,7 +25,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new scope based on the specified <code>name</code>.
+        /// Initializes a new scope based on the specified <paramref name="name"/>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
         public MicrosoftScope(string name) {
@@ -55,21 +55,20 @@ namespace Skybrud.Social.Microsoft.Scopes {
         }
 
         /// <summary>
-        /// Attempts to get a scope with the specified <code>name</code>.
+        /// Attempts to get a scope with the specified <paramref name="name"/>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
-        /// <returns>Gets a scope matching the specified <code>name</code>, or <code>null</code> if not found-</returns>
+        /// <returns>Gets a scope matching the specified <paramref name="name"/>, or <code>null</code> if not found.</returns>
         public static MicrosoftScope GetScope(string name) {
             MicrosoftScope scope;
             return Scopes.TryGetValue(name, out scope) ? scope : null;
         }
 
         /// <summary>
-        /// Gets whether the scope is a known scope.
+        /// Gets whether the scope with the specified <paramref name="name"/> is a known scope.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
-        /// <returns>Returns <code>true</code> if the specified <code>name</code> matches a known
-        /// scope, otherwise <code>false</code>.</returns>
+        /// <returns><code>true</code> if <paramref name="name"/> matches a known scope, otherwise <code>false</code>.</returns>
         public static bool ScopeExists(string name) {
             return Scopes.ContainsKey(name);
         }
@@ -84,7 +83,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>
-        /// <returns>Returns a new collection based on <code>left</code> and <code>right</code>.</returns>
+        /// <returns>A new collection based on <paramref name="left"/> and <paramref name="right"/>.</returns>
         public static MicrosoftScopeCollection operator +(MicrosoftScope left, MicrosoftScope right) {
             return new MicrosoftScopeCollection(left, right);
         }

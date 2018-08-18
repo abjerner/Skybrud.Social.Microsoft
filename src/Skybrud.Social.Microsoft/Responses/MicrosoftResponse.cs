@@ -5,7 +5,7 @@ using Skybrud.Social.Http;
 namespace Skybrud.Social.Microsoft.Responses {
 
     /// <summary>
-    /// Class representing a response from of the the various Microsoft APIs.
+    /// Class representing a response from one of the the various Microsoft APIs.
     /// </summary>
     public abstract class MicrosoftResponse : SocialResponse {
 
@@ -18,7 +18,7 @@ namespace Skybrud.Social.Microsoft.Responses {
         #region Static methods
 
         /// <summary>
-        /// Validates the specified <code>response</code>.
+        /// Validates the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The response to be validated.</param>
         public static void ValidateResponse(SocialHttpResponse response) {
@@ -36,7 +36,7 @@ namespace Skybrud.Social.Microsoft.Responses {
     }
 
     /// <summary>
-    /// Class representing a response from of the the various Microsoft APIs.
+    /// Class representing a response from one of the the various Microsoft APIs.
     /// </summary>
     public class MicrosoftResponse<T> : MicrosoftResponse {
 
@@ -51,6 +51,10 @@ namespace Skybrud.Social.Microsoft.Responses {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="response"/>.
+        /// </summary>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         protected MicrosoftResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion

@@ -5,6 +5,9 @@ using Skybrud.Social.Microsoft.Objects;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
     
+    /// <summary>
+    /// Class representing a Windows Live user.
+    /// </summary>
     public class WindowsLiveUser : MicrosoftObject {
 
         #region Properties
@@ -48,10 +51,10 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <see cref="WindowsLiveUser"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="WindowsLiveUser"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="WindowsLiveUser"/>.</returns>
+        /// <returns>An instance of <see cref="WindowsLiveUser"/>.</returns>
         public static WindowsLiveUser Parse(JObject obj) {
             return obj == null ? null : new WindowsLiveUser(obj);
         }

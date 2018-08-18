@@ -23,10 +23,10 @@ namespace Skybrud.Social.Microsoft.Responses.Authentication {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>response</code> into an instance of <see cref="MicrosoftTokenResponse"/>.
+        /// Parses the specified <paramref name="response"/> into an instance of <see cref="MicrosoftTokenResponse"/>.
         /// </summary>
         /// <param name="response">The response to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="MicrosoftTokenResponse"/>.</returns>
+        /// <returns>An instance of <see cref="MicrosoftTokenResponse"/>.</returns>
         public static MicrosoftTokenResponse ParseResponse(SocialHttpResponse response) {
 
             // Some input validation

@@ -29,7 +29,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new collection based on the specified <code>array</code> of scopes.
+        /// Initializes a new collection based on the specified <paramref name="array"/> of scopes.
         /// </summary>
         /// <param name="array">Array of scopes.</param>
         public MicrosoftScopeCollection(params MicrosoftScope[] array) {
@@ -41,7 +41,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Member methods
 
         /// <summary>
-        /// Adds the specified <code>scope</code> to the collection.
+        /// Adds the specified <paramref name="scope"/> to the collection.
         /// </summary>
         /// <param name="scope">The scope to be added.</param>
         public void Add(MicrosoftScope scope) {
@@ -51,7 +51,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// <summary>
         /// Returns an array of scopes based on the collection.
         /// </summary>
-        /// <returns>Array of scopes contained in the location.</returns>
+        /// <returns>Array of <see cref="MicrosoftScope"/> contained in the location.</returns>
         public MicrosoftScope[] ToArray() {
             return _list.ToArray();
         }
@@ -59,7 +59,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// <summary>
         /// Returns an array of strings representing each scope in the collection.
         /// </summary>
-        /// <returns>Array of strings representing each scope in the collection.</returns>
+        /// <returns>Array of <see cref="String"/> representing each scope in the collection.</returns>
         public string[] ToStringArray() {
             return (from scope in _list select scope.Name).ToArray();
         }
@@ -67,7 +67,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// <summary>
         /// Returns a string representing the scopea added to the collection using a comma as a separator.
         /// </summary>
-        /// <returns>String of scopes separated by a comma.</returns>
+        /// <returns>A string of scopes separated by a comma.</returns>
         public override string ToString() {
             return String.Join(" ", from scope in _list select scope.Name);
         }
@@ -77,28 +77,28 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Operator overloading
 
         /// <summary>
-        /// Initializes a new collection based on a single <code>scope</code>.
+        /// Initializes a new collection based on a single <paramref name="scope"/>.
         /// </summary>
         /// <param name="scope">The scope the collection should be based on.</param>
-        /// <returns>Returns a new collection based on a single <code>scope</code>.</returns>
+        /// <returns>A new collection based on a single <paramref name="scope"/>.</returns>
         public static implicit operator MicrosoftScopeCollection(MicrosoftScope scope) {
             return new MicrosoftScopeCollection(scope);
         }
 
         /// <summary>
-        /// Initializes a new collection based on an <code>array</code> of scopes.
+        /// Initializes a new collection based on an <paramref name="array"/> of scopes.
         /// </summary>
         /// <param name="array">The array of scopes the collection should be based on.</param>
-        /// <returns>Returns a new collection based on an <code>array</code> of scopes.</returns>
+        /// <returns>A new collection based on an <paramref name="array"/> of scopes.</returns>
         public static implicit operator MicrosoftScopeCollection(MicrosoftScope[] array) {
             return new MicrosoftScopeCollection(array ?? new MicrosoftScope[0]);
         }
 
         /// <summary>
-        /// Adds support for adding a <code>scope</code> to the <code>collection</code> using the plus operator.
+        /// Adds <paramref name="scope"/> to <paramref name="collection"/> using the plus operator.
         /// </summary>
-        /// <param name="collection">The collection to which <code>scope</code> will be added.</param>
-        /// <param name="scope">The scope to be added to the <code>collection</code>.</param>
+        /// <param name="collection">The collection to which <paramref name="scope"/> will be added.</param>
+        /// <param name="scope">The scope to be added to the <paramref name="collection"/>.</param>
         public static MicrosoftScopeCollection operator +(MicrosoftScopeCollection collection, MicrosoftScope scope) {
             collection.Add(scope);
             return collection;

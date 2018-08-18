@@ -18,7 +18,7 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
         public string TokenType { get; private set; }
 
         /// <summary>
-        /// Gets an instance of <code>TimeSpan</code> for when the access token will expire.
+        /// Gets an instance of <see cref="TimeSpan"/> for when the access token will expire.
         /// </summary>
         public TimeSpan ExpiresIn { get; private set; }
 
@@ -60,38 +60,35 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
 
         #region Constructors
 
-        private MicrosoftTokenResponseBody(JObject obj) : base(obj) { }
+        private MicrosoftTokenResponseBody(JObject obj) : base(obj) {
+
+            // Convert the "scope" string to a collection of scopes
+            Scope = new MicrosoftScopeCollection();
+            foreach (string name in obj.GetString("scope").Split(' ')) {
+                MicrosoftScope scope = MicrosoftScope.GetScope(name) ?? MicrosoftScope.RegisterScope(name);
+                Scope.Add(scope);
+            }
+
+            // Parse the rest of the response body
+            TokenType = obj.GetString("token_type");
+            ExpiresIn = obj.GetDouble("expires_in", TimeSpan.FromSeconds);
+            AccessToken = obj.GetString("access_token");
+            AuthenticationToken = obj.GetString("authentication_token");
+            RefreshToken = obj.GetString("refresh_token");
+
+        }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <see cref="MicrosoftTokenResponseBody"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="MicrosoftTokenResponseBody"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="MicrosoftTokenResponseBody"/>.</returns>
+        /// <returns>An instance of <see cref="MicrosoftTokenResponseBody"/>.</returns>
         public static MicrosoftTokenResponseBody Parse(JObject obj) {
-            
-            if (obj == null) return null;
-
-            // Convert the "scope" string to a collection of scopes
-            MicrosoftScopeCollection scopes = new MicrosoftScopeCollection();
-            foreach (string name in obj.GetString("scope").Split(' ')) {
-                MicrosoftScope scope = MicrosoftScope.GetScope(name) ?? MicrosoftScope.RegisterScope(name);
-                scopes.Add(scope);
-            }
-
-            // Parse the rest of the response
-            return new MicrosoftTokenResponseBody(obj) {
-                TokenType = obj.GetString("token_type"),
-                ExpiresIn = obj.GetDouble("expires_in", TimeSpan.FromSeconds),
-                Scope = scopes,
-                AccessToken = obj.GetString("access_token"),
-                AuthenticationToken = obj.GetString("authentication_token"),
-                RefreshToken = obj.GetString("refresh_token")
-            };
-        
+            return obj == null ? null : new MicrosoftTokenResponseBody(obj);
         }
 
         #endregion

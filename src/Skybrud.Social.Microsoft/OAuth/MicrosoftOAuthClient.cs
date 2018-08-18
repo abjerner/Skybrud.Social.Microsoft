@@ -8,6 +8,12 @@ using Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw;
 
 namespace Skybrud.Social.Microsoft.OAuth {
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <see>
+    ///     <cref>https://msdn.microsoft.com/en-us/library/hh243647.aspx</cref>
+    /// </see>
     public class MicrosoftOAuthClient : SocialHttpClient {
 
         #region Properties
@@ -57,7 +63,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified access token.
+        /// Initializes an OAuth client with the specified <paramref name="accessToken"/>.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
         public MicrosoftOAuthClient(string accessToken) : this() {
@@ -66,7 +72,8 @@ namespace Skybrud.Social.Microsoft.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified client ID and client secret.
+        /// Initializes an OAuth client with the specified <paramref name="clientId"/> and
+        /// <paramref name="clientSecret"/>.
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
@@ -78,7 +85,8 @@ namespace Skybrud.Social.Microsoft.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified client ID, client secret and return URI.
+        /// Initializes an OAuth client with the specified <paramref name="clientId"/>, <paramref name="clientSecret"/>
+        /// and <paramref name="redirectUri"/>.
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
@@ -97,21 +105,23 @@ namespace Skybrud.Social.Microsoft.OAuth {
         #region Methods
 
         /// <summary>
-        /// Generates the authorization URL using the specified state and scope.
+        /// Generates the authorization URL based on the specified <paramref name="state"/> and
+        /// <paramref name="scope"/>.
         /// </summary>
         /// <param name="state">The state to send to the Microsoft OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
-        /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
+        /// <returns>An authorization URL based on <paramref name="state"/> and <paramref name="scope"/>.</returns>
         public string GetAuthorizationUrl(string state, MicrosoftScopeCollection scope) {
             return GetAuthorizationUrl(state, scope.ToString());
         }
 
         /// <summary>
-        /// Generates the authorization URL using the specified state and scope.
+        /// Generates the authorization URL based on the specified <paramref name="state"/> and
+        /// <paramref name="scope"/>.
         /// </summary>
         /// <param name="state">The state to send to the Microsoft OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
-        /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
+        /// <returns>An authorization URL based on <paramref name="state"/> and <paramref name="scope"/>.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
 
             // Some validation
@@ -142,17 +152,17 @@ namespace Skybrud.Social.Microsoft.OAuth {
         }
 
         /// <summary>
-        /// Exchanges the specified authorization code for a refresh token and an access token.
+        /// Exchanges the specified <paramref name="authorizationCode"/> for a refresh token and an access token.
         /// </summary>
-        /// <param name="authCode">The authorization code received from the Microsoft OAuth dialog.</param>
-        /// <returns>Returns an access token based on the specified <code>authCode</code>.</returns>
-        public MicrosoftTokenResponse GetAccessTokenFromAuthCode(string authCode) {
+        /// <param name="authorizationCode">The authorization code received from the Microsoft OAuth dialog.</param>
+        /// <returns>An instance of <see cref="MicrosoftTokenResponse"/> representing the response.</returns>
+        public MicrosoftTokenResponse GetAccessTokenFromAuthCode(string authorizationCode) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
             if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException("ClientSecret");
             if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
-            if (String.IsNullOrWhiteSpace(authCode)) throw new ArgumentNullException("authCode");
+            if (String.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException("authorizationCode");
 
             // Initialize the POST data
             IHttpPostData data = new SocialHttpPostData {
@@ -172,10 +182,10 @@ namespace Skybrud.Social.Microsoft.OAuth {
         }
 
         /// <summary>
-        /// Gets a new access token from the specified <code>refreshToken</code>.
+        /// Gets a new access token from the specified <paramref name="refreshToken"/>.
         /// </summary>
         /// <param name="refreshToken">The refresh token of the user.</param>
-        /// <returns>Returns an access token based on the specified <code>refreshToken</code>.</returns>
+        /// <returns>An instance of <see cref="MicrosoftTokenResponse"/> representing the response.</returns>
         public MicrosoftTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
 
             // Some validation
