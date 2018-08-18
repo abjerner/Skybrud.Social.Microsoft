@@ -1,95 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DABC5422-2B84-46F2-BD6A-8FB7753EAA06}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>netstandard1.3;net45;net46;net47</TargetFrameworks>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <RunBuildTargets>true</RunBuildTargets>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <RootNamespace>Skybrud.Social.Microsoft</RootNamespace>
-    <AssemblyName>Skybrud.Social.Microsoft</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <Version>1.0.0-beta001</Version>
+    <Company>Skybrud.dk a/s</Company>
+    <Product>Skybrud.Social</Product>
+    <Authors>Anders Bjerner</Authors>
+    <Copyright>Copyright © 2017</Copyright>
+    <Description>Authentication and service implementation for the various Microsoft APIs.</Description>
+    <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.Microsoft</RepositoryUrl>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Skybrud.Essentials, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.Essentials.1.0.4\lib\net45\Skybrud.Essentials.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Skybrud.Social.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.Social.Core.1.0.0-beta5\lib\net45\Skybrud.Social.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Exceptions\MicrosoftException.cs" />
-    <Compile Include="MicrosoftService.cs" />
-    <Compile Include="OAuth\MicrosoftOAuthClient.cs" />
-    <Compile Include="Objects\Authentication\MicrosoftTokenResponseBody.cs" />
-    <Compile Include="Objects\MicrosoftObject.cs" />
-    <Compile Include="OneDrive\Scopes\OneDriveScopes.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfoGenerated.cs" />
-    <Compile Include="Responses\Authentication\MicrosoftTokenResponse.cs" />
-    <Compile Include="Responses\MicrosoftResponse.cs" />
-    <Compile Include="Scopes\MicrosoftScope.cs" />
-    <Compile Include="Scopes\MicrosoftScopeCollection.cs" />
-    <Compile Include="WindowsLive\Objects\Users\WindowsLiveUserEmailsInfo.cs" />
-    <Compile Include="WindowsLive\Scopes\WindowsLiveScopes.cs" />
-    <Compile Include="WindowsLive\Endpoints\WindowsLiveEndpoint.cs" />
-    <Compile Include="WindowsLive\Endpoints\Raw\WindowsLiveRawEndpoint.cs" />
-    <Compile Include="WindowsLive\Objects\Users\WindowsLiveUser.cs" />
-    <Compile Include="WindowsLive\Responses\WindowsLiveGetUserResponse.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Properties\AssemblyInfo.json" />
-    <None Include="Skybrud.Social.Microsoft.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LICENSE.txt" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)build\Skybrud.Social.PreBuildTool.exe" 2016-06-18 "$(ProjectPath)"</PreBuildEvent>
+    <PackageTags>Microsoft, Windows, Live, API, Skybrud, Social, OAuth, JSON</PackageTags>
+    <PackageLicenseUrl>https://github.com/abjerner/Skybrud.Social.Microsoft/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/abjerner/Skybrud.Social.Microsoft</PackageProjectUrl>
+    <PackageIconUrl>https://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
+    <DefineConstants>NET_STANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net47'">
+    <DefineConstants>NET_FRAMEWORK</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Skybrud.Social.Core" Version="1.0.10" />
+  </ItemGroup>
+
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)build\UpdateAssemblyInfoJson.exe" "$(ProjectPath)" "$(TargetPath)"</PostBuildEvent>
+    <DocumentationFile>bin\Release\$(TargetFramework)\$(TargetName).Spotify.xml</DocumentationFile>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  
+  <Target Name="PreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(RunBuildTargets)'=='true'">
+    <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2015-09-11 /projectPath=&quot;$(SolutionDir)Skybrud.Social.Microsoft\Skybrud.Social.Microsoft.csproj&quot;" />
   </Target>
-  <Target Name="AfterBuild">
+
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='netstandard1.3|true'">
+    <Exec Command="&quot;$(SolutionDir)build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
-  -->
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir $(ProjectDir)bin\Dev\$(TargetFramework)&#xD;&#xA;xcopy $(ProjectDir)bin\$(ConfigurationName)\$(TargetFramework)\$(TargetName).* $(ProjectDir)bin\Dev\$(TargetFramework)\ /y" />
+  </Target>
+
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Skybrud.Essentials.Common;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces.Http;
 using Skybrud.Social.Microsoft.Responses.Authentication;
 using Skybrud.Social.Microsoft.Scopes;
 using Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw;
@@ -124,7 +124,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             }
 
             // Construct the query string
-            NameValueCollection query = new NameValueCollection {
+            IHttpQueryString query = new SocialHttpQueryString {
                 {"client_id", ClientId},
                 {"redirect_uri", RedirectUri},
                 {"response_type", "code"},
@@ -137,7 +137,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             }
 
             // Construct thr authorization URL
-            return "https://login.live.com/oauth20_authorize.srf?" + SocialUtils.Misc.NameValueCollectionToQueryString(query);
+            return "https://login.live.com/oauth20_authorize.srf?" + query;
 
         }
 
@@ -155,11 +155,11 @@ namespace Skybrud.Social.Microsoft.OAuth {
             if (String.IsNullOrWhiteSpace(authCode)) throw new ArgumentNullException("authCode");
 
             // Initialize the POST data
-            NameValueCollection data = new NameValueCollection {
+            IHttpPostData data = new SocialHttpPostData {
                 {"client_id", ClientId},
                 {"redirect_uri", RedirectUri},
                 {"client_secret", ClientSecret},
-                {"code", authCode },
+                {"code", authorizationCode },
                 {"grant_type", "authorization_code"}
             };
 
@@ -185,7 +185,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException("refreshToken");
 
             // Initialize the POST data
-            NameValueCollection data = new NameValueCollection {
+            IHttpPostData data = new SocialHttpPostData {
                 {"client_id", ClientId},
                 {"redirect_uri", RedirectUri},
                 {"client_secret", ClientSecret},
