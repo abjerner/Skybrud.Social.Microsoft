@@ -27,7 +27,7 @@ namespace Skybrud.Social.Microsoft.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Now throw some exceptions
-            throw new MicrosoftException(response);
+            throw new MicrosoftHttpException(response);
 
         }
 
