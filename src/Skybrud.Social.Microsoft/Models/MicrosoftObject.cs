@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Skybrud.Social.Microsoft.Objects {
+namespace Skybrud.Social.Microsoft.Models {
 
     /// <summary>
     /// Class representing a basic object from one of the Microsoft APIs derived from an instance of <see cref="JObject"/>.

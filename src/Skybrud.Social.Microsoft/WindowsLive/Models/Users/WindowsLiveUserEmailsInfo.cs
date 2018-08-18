@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Social.Microsoft.Objects;
+using Skybrud.Social.Microsoft.Models;
 
-namespace Skybrud.Social.Microsoft.WindowsLive.Objects.Users {
+namespace Skybrud.Social.Microsoft.WindowsLive.Models.Users {
     
     /// <summary>
     /// Class representing email information about a Windows Live user.

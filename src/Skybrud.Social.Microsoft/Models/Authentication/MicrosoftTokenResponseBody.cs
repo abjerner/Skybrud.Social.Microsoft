@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.Microsoft.Scopes;
 
-namespace Skybrud.Social.Microsoft.Objects.Authentication {
+namespace Skybrud.Social.Microsoft.Models.Authentication {
     
     /// <summary>
     /// Class representing the response body of a call to get a refresh token or an access token.

@@ -1,7 +1,7 @@
 ﻿using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Microsoft.Responses;
-using Skybrud.Social.Microsoft.WindowsLive.Objects.Users;
+using Skybrud.Social.Microsoft.WindowsLive.Models.Users;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Responses {
 

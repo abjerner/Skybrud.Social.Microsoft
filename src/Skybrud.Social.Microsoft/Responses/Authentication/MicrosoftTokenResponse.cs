@@ -1,6 +1,6 @@
 ﻿using System;
 using Skybrud.Social.Http;
-using Skybrud.Social.Microsoft.Objects.Authentication;
+using Skybrud.Social.Microsoft.Models.Authentication;
 
 namespace Skybrud.Social.Microsoft.Responses.Authentication {
     
