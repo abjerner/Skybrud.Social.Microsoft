@@ -216,13 +216,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// </summary>
         /// <param name="request">The instance of <see cref="SocialHttpRequest"/> representing the request.</param>
         protected override void PrepareHttpRequest(SocialHttpRequest request) {
-
-            // Append the access token to the query string if present in the client and not already
-            // specified in the query string
-            if (!request.QueryString.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
-                request.QueryString.Add("access_token", AccessToken);
-            }
-
+            if (!String.IsNullOrWhiteSpace(AccessToken)) request.Authorization = "bearer " + AccessToken;
         }
 
         #endregion
