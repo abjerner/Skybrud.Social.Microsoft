@@ -9,7 +9,7 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Users {
     /// <see>
     ///     <cref>https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/users</cref>
     /// </see>
-    public class GraphUser : GraphObject {
+    public class MicrosoftGraphUser : MicrosoftGraphObject {
 
         #region Properties
 
@@ -49,7 +49,7 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Users {
 
         #region Constructors
 
-        private GraphUser(JObject obj) : base(obj) {
+        private MicrosoftGraphUser(JObject obj) : base(obj) {
             Id = obj.GetString("id");
             DisplayName = obj.GetString("displayName");
             Surname = obj.GetString("surname");
@@ -62,12 +62,12 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GraphUser"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="MicrosoftGraphUser"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GraphUser"/>.</returns>
-        public static GraphUser Parse(JObject obj) {
-            return obj == null ? null : new GraphUser(obj);
+        /// <returns>An instance of <see cref="MicrosoftGraphUser"/>.</returns>
+        public static MicrosoftGraphUser Parse(JObject obj) {
+            return obj == null ? null : new MicrosoftGraphUser(obj);
         }
 
         #endregion

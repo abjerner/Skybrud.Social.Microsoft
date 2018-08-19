@@ -7,7 +7,7 @@ namespace Skybrud.Social.Microsoft.Graph.Responses {
     /// <summary>
     /// Class representing a response from the Microsoft Graph API.
     /// </summary>
-    public abstract class GraphResponse : SocialResponse {
+    public abstract class MicrosoftGraphResponse : SocialResponse {
 
         #region Constructor
 
@@ -15,7 +15,7 @@ namespace Skybrud.Social.Microsoft.Graph.Responses {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The response.</param>
-        protected GraphResponse(SocialHttpResponse response) : base(response) { }
+        protected MicrosoftGraphResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace Skybrud.Social.Microsoft.Graph.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Now throw some exceptions
-            throw new GraphHttpException(response);
+            throw new MicrosoftGraphHttpException(response);
 
         }
 
@@ -42,7 +42,7 @@ namespace Skybrud.Social.Microsoft.Graph.Responses {
     /// <summary>
     /// Class representing a response from one of the the various Microsoft APIs.
     /// </summary>
-    public class GraphResponse<T> : GraphResponse {
+    public class MicrosoftGraphResponse<T> : MicrosoftGraphResponse {
 
         #region Properties
 
@@ -59,7 +59,7 @@ namespace Skybrud.Social.Microsoft.Graph.Responses {
         /// Initializes a new instance based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
-        protected GraphResponse(SocialHttpResponse response) : base(response) { }
+        protected MicrosoftGraphResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 

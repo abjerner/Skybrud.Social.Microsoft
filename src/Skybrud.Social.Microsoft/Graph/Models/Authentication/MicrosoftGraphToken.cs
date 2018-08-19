@@ -8,7 +8,7 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Authentication {
     /// <summary>
     /// Class representing the response body of a call to get a refresh token or an access token.
     /// </summary>
-    public class GraphToken : GraphObject {
+    public class MicrosoftGraphToken : MicrosoftGraphObject {
 
         #region Properties
 
@@ -20,7 +20,7 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Authentication {
         /// <summary>
         /// Gets a collection of the scopes the user has granted.
         /// </summary>
-        public GraphScopeCollection Scope { get; }
+        public MicrosoftGraphScopeCollection Scope { get; }
 
         /// <summary>
         /// Gets an instance of <see cref="TimeSpan"/> for when the access token will expire.
@@ -46,12 +46,12 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Authentication {
 
         #region Constructors
 
-        private GraphToken(JObject obj) : base(obj) {
+        private MicrosoftGraphToken(JObject obj) : base(obj) {
 
             // Convert the "scope" string to a collection of scopes
-            Scope = new GraphScopeCollection();
+            Scope = new MicrosoftGraphScopeCollection();
             foreach (string alias in obj.GetString("scope").Split(' ')) {
-                GraphScope scope = GraphScope.GetScope(alias) ?? GraphScope.RegisterScope(alias);
+                MicrosoftGraphScope scope = MicrosoftGraphScope.GetScope(alias) ?? MicrosoftGraphScope.RegisterScope(alias);
                 Scope.Add(scope);
             }
 
@@ -68,12 +68,12 @@ namespace Skybrud.Social.Microsoft.Graph.Models.Authentication {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GraphToken"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="MicrosoftGraphToken"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GraphToken"/>.</returns>
-        public static GraphToken Parse(JObject obj) {
-            return obj == null ? null : new GraphToken(obj);
+        /// <returns>An instance of <see cref="MicrosoftGraphToken"/>.</returns>
+        public static MicrosoftGraphToken Parse(JObject obj) {
+            return obj == null ? null : new MicrosoftGraphToken(obj);
         }
 
         #endregion

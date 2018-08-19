@@ -3,13 +3,13 @@
 namespace Skybrud.Social.Microsoft.Graph.Scopes {
 
     /// <summary>
-    /// Class representing a scope of the various Microsoft APIs.
+    /// Class representing a scope of the Microsoft Graph API.
     /// </summary>
-    public class GraphScope {
+    public class MicrosoftGraphScope {
 
         #region Private fields
 
-        private static readonly Dictionary<string, GraphScope> Scopes = new Dictionary<string, GraphScope>();
+        private static readonly Dictionary<string, MicrosoftGraphScope> Scopes = new Dictionary<string, MicrosoftGraphScope>();
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// Initializes a new scope based on the specified <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The alias of the scope.</param>
-        public GraphScope(string alias) {
+        public MicrosoftGraphScope(string alias) {
             Alias = alias;
         }
 
@@ -53,7 +53,7 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// <param name="alias">The alias of the scope.</param>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
-        public GraphScope(string alias, string name, string description) {
+        public MicrosoftGraphScope(string alias, string name, string description) {
             Alias = alias;
             Name = name;
             Description = description;
@@ -66,7 +66,7 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
         /// <param name="consent">Whether the scope requires consent from an administrator.</param>
-        public GraphScope(string alias, string name, string description, bool consent) {
+        public MicrosoftGraphScope(string alias, string name, string description, bool consent) {
             Alias = alias;
             Name = name;
             Description = description;
@@ -93,8 +93,8 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// Registers a scope in the internal dictionary.
         /// </summary>
         /// <param name="alias">The alias of the scope.</param>
-        internal static GraphScope RegisterScope(string alias) {
-            GraphScope scope = new GraphScope(alias);
+        internal static MicrosoftGraphScope RegisterScope(string alias) {
+            MicrosoftGraphScope scope = new MicrosoftGraphScope(alias);
             Scopes.Add(scope.Alias, scope);
             return scope;
         }
@@ -105,8 +105,8 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// <param name="alias">The alias of the scope.</param>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
-        internal static GraphScope RegisterScope(string alias, string name, string description) {
-            GraphScope scope = new GraphScope(alias, name, description);
+        internal static MicrosoftGraphScope RegisterScope(string alias, string name, string description) {
+            MicrosoftGraphScope scope = new MicrosoftGraphScope(alias, name, description);
             Scopes.Add(scope.Alias, scope);
             return scope;
         }
@@ -118,8 +118,8 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
         /// <param name="consent">Whether the scope requires consent from an administrator.</param>
-        internal static GraphScope RegisterScope(string alias, string name, string description, bool consent) {
-            GraphScope scope = new GraphScope(alias, name, description, consent);
+        internal static MicrosoftGraphScope RegisterScope(string alias, string name, string description, bool consent) {
+            MicrosoftGraphScope scope = new MicrosoftGraphScope(alias, name, description, consent);
             Scopes.Add(scope.Alias, scope);
             return scope;
         }
@@ -129,8 +129,8 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// </summary>
         /// <param name="alias">The alias of the scope.</param>
         /// <returns>Gets a scope matching the specified <paramref name="alias"/>, or <c>null</c> if not found.</returns>
-        public static GraphScope GetScope(string alias) {
-            return Scopes.TryGetValue(alias, out GraphScope scope) ? scope : null;
+        public static MicrosoftGraphScope GetScope(string alias) {
+            return Scopes.TryGetValue(alias, out MicrosoftGraphScope scope) ? scope : null;
         }
 
         /// <summary>
@@ -147,13 +147,13 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         #region Operators
 
         /// <summary>
-        /// Adding two instances of <see cref="GraphScope"/> will result in a <see cref="GraphScopeCollection"/> containing both scopes.
+        /// Adding two instances of <see cref="MicrosoftGraphScope"/> will result in a <see cref="MicrosoftGraphScopeCollection"/> containing both scopes.
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>
         /// <returns>A new collection based on <paramref name="left"/> and <paramref name="right"/>.</returns>
-        public static GraphScopeCollection operator +(GraphScope left, GraphScope right) {
-            return new GraphScopeCollection(left, right);
+        public static MicrosoftGraphScopeCollection operator +(MicrosoftGraphScope left, MicrosoftGraphScope right) {
+            return new MicrosoftGraphScopeCollection(left, right);
         }
 
         #endregion

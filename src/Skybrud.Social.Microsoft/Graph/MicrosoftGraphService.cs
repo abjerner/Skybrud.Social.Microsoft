@@ -6,29 +6,29 @@ using Skybrud.Social.Microsoft.Graph.Responses.Authentication;
 namespace Skybrud.Social.Microsoft.Graph {
 
     /// <summary>
-    /// Service implementation of the various Microsoft APIs.
+    /// Service implementation of the Microsoft Graph API.
     /// </summary>
-    public class GraphService {
+    public class MicrosoftGraphService {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the internal OAuth client.
         /// </summary>
-        public GraphOAuthClient Client { get; }
+        public MicrosoftGraphOAuthClient Client { get; }
 
         /// <summary>
         /// Gets a reference to the users endpoint.
         /// </summary>
-        public GraphUsersEndpoint Users { get; }
+        public MicrosoftGraphUsersEndpoint Users { get; }
 
         #endregion
 
         #region Constructors
 
-        private GraphService(GraphOAuthClient client) {
+        private MicrosoftGraphService(MicrosoftGraphOAuthClient client) {
             Client = client;
-            Users = new GraphUsersEndpoint(this);
+            Users = new MicrosoftGraphUsersEndpoint(this);
         }
 
         #endregion
@@ -39,9 +39,9 @@ namespace Skybrud.Social.Microsoft.Graph {
         /// Initialize a new service instance from the specified OAuth client.
         /// </summary>
         /// <param name="client">The OAuth client.</param>
-        public static GraphService CreateFromOAuthClient(GraphOAuthClient client) {
+        public static MicrosoftGraphService CreateFromOAuthClient(MicrosoftGraphOAuthClient client) {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            return new GraphService(client);
+            return new MicrosoftGraphService(client);
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace Skybrud.Social.Microsoft.Graph {
         /// token.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
-        public static GraphService CreateFromAccessToken(string accessToken) {
+        public static MicrosoftGraphService CreateFromAccessToken(string accessToken) {
             if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
-            return CreateFromOAuthClient(new GraphOAuthClient(accessToken));
+            return CreateFromOAuthClient(new MicrosoftGraphOAuthClient(accessToken));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Skybrud.Social.Microsoft.Graph {
         /// <param name="clientSecret">The client secret.</param>
         /// <param name="redirectUri">Te redirect URI.</param>
         /// <param name="refreshToken">The refresh token of the user.</param>
-        public static GraphService CreateFromRefreshToken(string clientId, string clientSecret, string redirectUri, string refreshToken) {
+        public static MicrosoftGraphService CreateFromRefreshToken(string clientId, string clientSecret, string redirectUri, string refreshToken) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
@@ -70,16 +70,16 @@ namespace Skybrud.Social.Microsoft.Graph {
             if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException(nameof(refreshToken));
 
             // Initialize a new OAuth client
-            GraphOAuthClient client = new GraphOAuthClient(clientId, clientSecret, redirectUri);
+            MicrosoftGraphOAuthClient client = new MicrosoftGraphOAuthClient(clientId, clientSecret, redirectUri);
 
             // Get an access token from the refresh token.
-            GraphTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
+            MicrosoftGraphTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
 
             // Update the OAuth client with the access token
             client.AccessToken = response.Body.AccessToken;
 
             // Initialize a new service instance
-            return new GraphService(client);
+            return new MicrosoftGraphService(client);
 
         }
 

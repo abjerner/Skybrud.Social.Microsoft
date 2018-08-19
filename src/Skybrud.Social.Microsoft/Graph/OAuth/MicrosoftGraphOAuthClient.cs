@@ -12,7 +12,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
     ///     <cref>https://developer.microsoft.com/en-us/graph/docs/concepts/auth_register_app_v2</cref>
     ///     <cref>https://developer.microsoft.com/en-us/graph/docs/concepts/auth_v2_user</cref>
     /// </see>
-    public class GraphOAuthClient : SocialHttpClient {
+    public class MicrosoftGraphOAuthClient : SocialHttpClient {
         
         #region Properties
 
@@ -39,7 +39,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// <summary>
         /// Gets a reference to the raw users endpoint.
         /// </summary>
-        public GraphUsersRawEndpoint Users { get; }
+        public MicrosoftGraphUsersRawEndpoint Users { get; }
 
         #endregion
        
@@ -48,15 +48,15 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// <summary>
         /// Initializes an OAuth client with empty information.
         /// </summary>
-        public GraphOAuthClient() {
-            Users = new GraphUsersRawEndpoint(this);
+        public MicrosoftGraphOAuthClient() {
+            Users = new MicrosoftGraphUsersRawEndpoint(this);
         }
 
         /// <summary>
         /// Initializes an OAuth client with the specified <paramref name="accessToken"/>.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
-        public GraphOAuthClient(string accessToken) : this() {
+        public MicrosoftGraphOAuthClient(string accessToken) : this() {
             if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
             AccessToken = accessToken;
         }
@@ -67,7 +67,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
-        public GraphOAuthClient(string clientId, string clientSecret) : this() {
+        public MicrosoftGraphOAuthClient(string clientId, string clientSecret) : this() {
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
             if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
             ClientId = clientId;
@@ -81,7 +81,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
         /// <param name="redirectUri">The redirect URI of the client.</param>
-        public GraphOAuthClient(string clientId, string clientSecret, string redirectUri) : this() {
+        public MicrosoftGraphOAuthClient(string clientId, string clientSecret, string redirectUri) : this() {
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
             if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
             if (String.IsNullOrWhiteSpace(redirectUri)) throw new ArgumentNullException(nameof(redirectUri));
@@ -115,7 +115,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// <see>
         ///     <cref>https://developer.microsoft.com/en-us/graph/docs/concepts/auth_v2_user#2-get-authorization</cref>
         /// </see>
-        public string GetAuthorizationUrl(string state, GraphScopeCollection scope){
+        public string GetAuthorizationUrl(string state, MicrosoftGraphScopeCollection scope){
             return GetAuthorizationUrl(state, scope?.ToString());
         }
 
@@ -162,11 +162,11 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// </summary>
         /// <param name="authorizationCode">The authorization code received from the Microsoft OAuth dialog.</param>
         /// <param name="scope">The scope.</param>
-        /// <returns>An instance of <see cref="GraphTokenResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="MicrosoftGraphTokenResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.microsoft.com/en-us/graph/docs/concepts/auth_v2_user#3-get-a-token</cref>
         /// </see>
-        public GraphTokenResponse GetAccessTokenFromAuthCode(string authorizationCode, string scope) {
+        public MicrosoftGraphTokenResponse GetAccessTokenFromAuthCode(string authorizationCode, string scope) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
@@ -188,7 +188,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
             SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://login.microsoftonline.com/common/oauth2/v2.0/token", null, data);
 
             // Parse the response
-            return GraphTokenResponse.ParseResponse(response);
+            return MicrosoftGraphTokenResponse.ParseResponse(response);
 
         }
 
@@ -196,11 +196,11 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
         /// Gets a new access token from the specified <paramref name="refreshToken"/>.
         /// </summary>
         /// <param name="refreshToken">The refresh token.</param>
-        /// <returns>An instance of <see cref="GraphTokenResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="MicrosoftGraphTokenResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.microsoft.com/en-us/graph/docs/concepts/auth_v2_user#5-use-the-refresh-token-to-get-a-new-access-token</cref>
         /// </see>
-        public GraphTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
+        public MicrosoftGraphTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
@@ -221,7 +221,7 @@ namespace Skybrud.Social.Microsoft.Graph.OAuth {
             SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://login.microsoftonline.com/common/oauth2/v2.0/token", null, data);
 
             // Parse the response
-            return GraphTokenResponse.ParseResponse(response);
+            return MicrosoftGraphTokenResponse.ParseResponse(response);
 
         }
 

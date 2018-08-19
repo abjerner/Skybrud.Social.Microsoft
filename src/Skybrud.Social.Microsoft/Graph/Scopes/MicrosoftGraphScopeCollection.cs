@@ -7,11 +7,11 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
     /// <summary>
     /// Class representing a collection of scopes for the various Microsoft APIs.
     /// </summary>
-    public class GraphScopeCollection {
+    public class MicrosoftGraphScopeCollection {
 
         #region Private fields
 
-        private readonly List<GraphScope> _list = new List<GraphScope>();
+        private readonly List<MicrosoftGraphScope> _list = new List<MicrosoftGraphScope>();
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// <summary>
         /// Gets an array of all the scopes added to the collection.
         /// </summary>
-        public GraphScope[] Items => _list.ToArray();
+        public MicrosoftGraphScope[] Items => _list.ToArray();
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// Initializes a new collection based on the specified <paramref name="array"/> of scopes.
         /// </summary>
         /// <param name="array">Array of scopes.</param>
-        public GraphScopeCollection(params GraphScope[] array) {
+        public MicrosoftGraphScopeCollection(params MicrosoftGraphScope[] array) {
             _list.AddRange(array);
         }
 
@@ -42,15 +42,15 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// Adds the specified <paramref name="scope"/> to the collection.
         /// </summary>
         /// <param name="scope">The scope to be added.</param>
-        public void Add(GraphScope scope) {
+        public void Add(MicrosoftGraphScope scope) {
             _list.Add(scope);
         }
 
         /// <summary>
         /// Returns an array of scopes based on the collection.
         /// </summary>
-        /// <returns>Array of <see cref="GraphScope"/> contained in the location.</returns>
-        public GraphScope[] ToArray() {
+        /// <returns>Array of <see cref="MicrosoftGraphScope"/> contained in the location.</returns>
+        public MicrosoftGraphScope[] ToArray() {
             return _list.ToArray();
         }
 
@@ -79,8 +79,8 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// </summary>
         /// <param name="scope">The scope the collection should be based on.</param>
         /// <returns>A new collection based on a single <paramref name="scope"/>.</returns>
-        public static implicit operator GraphScopeCollection(GraphScope scope) {
-            return new GraphScopeCollection(scope);
+        public static implicit operator MicrosoftGraphScopeCollection(MicrosoftGraphScope scope) {
+            return new MicrosoftGraphScopeCollection(scope);
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// </summary>
         /// <param name="array">The array of scopes the collection should be based on.</param>
         /// <returns>A new collection based on an <paramref name="array"/> of scopes.</returns>
-        public static implicit operator GraphScopeCollection(GraphScope[] array) {
-            return new GraphScopeCollection(array ?? new GraphScope[0]);
+        public static implicit operator MicrosoftGraphScopeCollection(MicrosoftGraphScope[] array) {
+            return new MicrosoftGraphScopeCollection(array ?? new MicrosoftGraphScope[0]);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Skybrud.Social.Microsoft.Graph.Scopes {
         /// </summary>
         /// <param name="collection">The collection to which <paramref name="scope"/> will be added.</param>
         /// <param name="scope">The scope to be added to the <paramref name="collection"/>.</param>
-        public static GraphScopeCollection operator +(GraphScopeCollection collection, GraphScope scope) {
+        public static MicrosoftGraphScopeCollection operator +(MicrosoftGraphScopeCollection collection, MicrosoftGraphScope scope) {
             collection.Add(scope);
             return collection;
         }

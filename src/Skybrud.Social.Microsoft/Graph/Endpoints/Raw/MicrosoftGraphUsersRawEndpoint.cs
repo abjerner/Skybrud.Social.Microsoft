@@ -10,20 +10,20 @@ namespace Skybrud.Social.Microsoft.Graph.Endpoints.Raw {
     /// <see>
     ///     <cref>https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/users</cref>
     /// </see>
-    public class GraphUsersRawEndpoint {
+    public class MicrosoftGraphUsersRawEndpoint {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public GraphOAuthClient Client { get; }
+        public MicrosoftGraphOAuthClient Client { get; }
 
         #endregion
 
         #region Constructors
 
-        internal GraphUsersRawEndpoint(GraphOAuthClient client) {
+        internal MicrosoftGraphUsersRawEndpoint(MicrosoftGraphOAuthClient client) {
             Client = client;
         }
 

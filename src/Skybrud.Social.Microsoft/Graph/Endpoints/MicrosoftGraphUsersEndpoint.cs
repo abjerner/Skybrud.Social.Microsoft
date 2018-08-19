@@ -3,25 +3,25 @@ using Skybrud.Social.Microsoft.Graph.Responses.Users;
 
 namespace Skybrud.Social.Microsoft.Graph.Endpoints {
 
-    public class GraphUsersEndpoint {
+    public class MicrosoftGraphUsersEndpoint {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the Microsoft service.
         /// </summary>
-        public GraphService Service { get; }
+        public MicrosoftGraphService Service { get; }
 
         /// <summary>
         /// A reference to the raw endpoint.
         /// </summary>
-        public GraphUsersRawEndpoint Raw => Service.Client.Users;
+        public MicrosoftGraphUsersRawEndpoint Raw => Service.Client.Users;
 
         #endregion
 
         #region Constructors
 
-        internal GraphUsersEndpoint(GraphService service) {
+        internal MicrosoftGraphUsersEndpoint(MicrosoftGraphService service) {
             Service = service;
         }
 
@@ -32,18 +32,18 @@ namespace Skybrud.Social.Microsoft.Graph.Endpoints {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GraphGetUserResponse"/> representing the response.</returns>
-        public GraphGetUserResponse GetSelf() {
-            return GraphGetUserResponse.ParseResponse(Raw.GetSelf());
+        /// <returns>An instance of <see cref="MicrosoftGraphGetUserResponse"/> representing the response.</returns>
+        public MicrosoftGraphGetUserResponse GetSelf() {
+            return MicrosoftGraphGetUserResponse.ParseResponse(Raw.GetSelf());
         }
 
         /// <summary>
         /// Gets information about the user with the specified <paramref name="userId"/>.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        /// <returns>An instance of <see cref="GraphGetUserResponse"/> representing the response.</returns>
-        public GraphGetUserResponse GetUser(string userId) {
-            return GraphGetUserResponse.ParseResponse(Raw.GetUser(userId));
+        /// <returns>An instance of <see cref="MicrosoftGraphGetUserResponse"/> representing the response.</returns>
+        public MicrosoftGraphGetUserResponse GetUser(string userId) {
+            return MicrosoftGraphGetUserResponse.ParseResponse(Raw.GetUser(userId));
         }
 
         #endregion

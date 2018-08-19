@@ -6,7 +6,7 @@ namespace Skybrud.Social.Microsoft.Graph.Models {
     /// <summary>
     /// Class representing a basic object from the Microsoft Graph API derived from an instance of <see cref="JObject"/>.
     /// </summary>
-    public class GraphObject {
+    public class MicrosoftGraphObject {
 
         #region Properties
 
@@ -24,7 +24,7 @@ namespace Skybrud.Social.Microsoft.Graph.Models {
         /// Initializes a new instance from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> representing the object.</param>
-        protected GraphObject(JObject obj) {
+        protected MicrosoftGraphObject(JObject obj) {
             JObject = obj;
         }
 
