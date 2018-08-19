@@ -10,11 +10,11 @@
 
   <PropertyGroup>
     <RootNamespace>Skybrud.Social.Microsoft</RootNamespace>
-    <Version>1.0.0-beta001</Version>
+    <Version>1.0.0-beta002</Version>
     <Company>Skybrud.dk a/s</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
-    <Copyright>Copyright © 2017</Copyright>
+    <Copyright>Copyright © 2018</Copyright>
     <Description>Authentication and service implementation for the various Microsoft APIs.</Description>
     <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.Microsoft</RepositoryUrl>
   </PropertyGroup>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(SolutionName).xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Social.Microsoft.xml</DocumentationFile>
   </PropertyGroup>
   
   <Target Name="PreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(RunBuildTargets)'=='true'">
@@ -47,7 +47,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir $(ProjectDir)bin\Dev\$(TargetFramework)&#xD;&#xA;xcopy $(ProjectDir)bin\$(ConfigurationName)\$(TargetFramework)\$(TargetName).* $(ProjectDir)bin\Dev\$(TargetFramework)\ /y&#xD;&#xA;&quot;$(SolutionDir)build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
+    <Exec Command="mkdir $(ProjectDir)bin\Dev\$(TargetFramework)&#xD;&#xA;xcopy $(ProjectDir)bin\$(ConfigurationName)\$(TargetFramework)\$(TargetName).* $(ProjectDir)bin\Dev\$(TargetFramework)\ /y&#xD;&#xA;&quot;$(ProjectDir)..\build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
 
 </Project>
