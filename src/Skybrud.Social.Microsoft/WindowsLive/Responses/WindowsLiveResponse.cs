@@ -1,17 +1,17 @@
 ﻿using System.Net;
 using Skybrud.Social.Http;
-using Skybrud.Social.Microsoft.Exceptions;
+using Skybrud.Social.Microsoft.WindowsLive.Exceptions;
 
-namespace Skybrud.Social.Microsoft.Responses {
+namespace Skybrud.Social.Microsoft.WindowsLive.Responses {
 
     /// <summary>
     /// Class representing a response from one of the the various Microsoft APIs.
     /// </summary>
-    public abstract class MicrosoftResponse : SocialResponse {
+    public abstract class WindowsLiveResponse : SocialResponse {
 
         #region Constructor
 
-        protected MicrosoftResponse(SocialHttpResponse response) : base(response) { }
+        protected WindowsLiveResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace Skybrud.Social.Microsoft.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Now throw some exceptions
-            throw new MicrosoftHttpException(response);
+            throw new WindowsLiveHttpException(response);
 
         }
 
@@ -38,7 +38,7 @@ namespace Skybrud.Social.Microsoft.Responses {
     /// <summary>
     /// Class representing a response from one of the the various Microsoft APIs.
     /// </summary>
-    public class MicrosoftResponse<T> : MicrosoftResponse {
+    public class WindowsLiveResponse<T> : WindowsLiveResponse {
 
         #region Properties
 
@@ -55,7 +55,7 @@ namespace Skybrud.Social.Microsoft.Responses {
         /// Initializes a new instance based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
-        protected MicrosoftResponse(SocialHttpResponse response) : base(response) { }
+        protected WindowsLiveResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 

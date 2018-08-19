@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Skybrud.Social.Microsoft.Scopes {
+namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
 
     /// <summary>
     /// Class representing a scope of the various Microsoft APIs.
     /// </summary>
-    public class MicrosoftScope {
+    public class WindowsLiveScope {
 
         #region Private fields
 
-        private static readonly Dictionary<string, MicrosoftScope> Scopes = new Dictionary<string, MicrosoftScope>();
+        private static readonly Dictionary<string, WindowsLiveScope> Scopes = new Dictionary<string, WindowsLiveScope>();
 
         #endregion
 
@@ -28,7 +28,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// Initializes a new scope based on the specified <paramref name="name"/>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
-        public MicrosoftScope(string name) {
+        public WindowsLiveScope(string name) {
             Name = name;
         }
 
@@ -48,8 +48,8 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// Registers a scope in the internal dictionary.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
-        internal static MicrosoftScope RegisterScope(string name) {
-            MicrosoftScope scope = new MicrosoftScope(name);
+        internal static WindowsLiveScope RegisterScope(string name) {
+            WindowsLiveScope scope = new WindowsLiveScope(name);
             Scopes.Add(scope.Name, scope);
             return scope;
         }
@@ -59,8 +59,8 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// </summary>
         /// <param name="name">The name of the scope.</param>
         /// <returns>Gets a scope matching the specified <paramref name="name"/>, or <c>null</c> if not found.</returns>
-        public static MicrosoftScope GetScope(string name) {
-            MicrosoftScope scope;
+        public static WindowsLiveScope GetScope(string name) {
+            WindowsLiveScope scope;
             return Scopes.TryGetValue(name, out scope) ? scope : null;
         }
 
@@ -78,14 +78,14 @@ namespace Skybrud.Social.Microsoft.Scopes {
         #region Operators
 
         /// <summary>
-        /// Adding two instances of <see cref="MicrosoftScope"/> will result in a
-        /// <see cref="MicrosoftScopeCollection"/> containing both scopes.
+        /// Adding two instances of <see cref="WindowsLiveScope"/> will result in a
+        /// <see cref="WindowsLiveScopeCollection"/> containing both scopes.
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>
         /// <returns>A new collection based on <paramref name="left"/> and <paramref name="right"/>.</returns>
-        public static MicrosoftScopeCollection operator +(MicrosoftScope left, MicrosoftScope right) {
-            return new MicrosoftScopeCollection(left, right);
+        public static WindowsLiveScopeCollection operator +(WindowsLiveScope left, WindowsLiveScope right) {
+            return new WindowsLiveScopeCollection(left, right);
         }
 
         #endregion

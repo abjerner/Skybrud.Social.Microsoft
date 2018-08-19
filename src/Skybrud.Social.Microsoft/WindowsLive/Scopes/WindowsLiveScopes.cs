@@ -1,6 +1,4 @@
-﻿using Skybrud.Social.Microsoft.Scopes;
-
-namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
+﻿namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
     
     /// <see>
     ///     <cref>https://msdn.microsoft.com/en-us/library/hh243646.aspx</cref>
@@ -17,7 +15,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
         /// <see>
         ///     <cref>https://msdn.microsoft.com/en-us/library/hh243646.aspx#wlbasic</cref>
         /// </see>
-        public static readonly MicrosoftScope Basic = new MicrosoftScope("wl.basic");
+        public static readonly WindowsLiveScope Basic = new WindowsLiveScope("wl.basic");
 
         /// <summary>
         /// The ability of an app to read and update a user's info at any time. Without this scope, an app can access
@@ -26,7 +24,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
         /// <see>
         ///     <cref>https://msdn.microsoft.com/en-us/library/hh243646.aspx#wlofflineaccess</cref>
         /// </see>
-        public static readonly MicrosoftScope OfflineAccess = new MicrosoftScope("wl.offline_access");
+        public static readonly WindowsLiveScope OfflineAccess = new WindowsLiveScope("wl.offline_access");
 
         /// <summary>
         /// Single sign-in behavior. With single sign-in, users who are already signed in to Live Connect are also
@@ -35,7 +33,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
         /// <see>
         ///     <cref>https://msdn.microsoft.com/en-us/library/hh243646.aspx#wlsignin</cref>
         /// </see>
-        public static readonly MicrosoftScope Signin = new MicrosoftScope("wl.signin");
+        public static readonly WindowsLiveScope Signin = new WindowsLiveScope("wl.signin");
 
         #endregion
 
@@ -47,7 +45,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
         /// <see>
         ///     <cref>https://msdn.microsoft.com/en-us/library/hh243646.aspx#wlbirthday</cref>
         /// </see>
-        public static readonly MicrosoftScope Birthday = new MicrosoftScope("wl.birthday");
+        public static readonly WindowsLiveScope Birthday = new WindowsLiveScope("wl.birthday");
 
         /// <summary>
         /// Read access to a user's personal, preferred, and business email addresses.
@@ -55,7 +53,7 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
         /// <see>
         ///     <cref>https://msdn.microsoft.com/en-us/library/hh243646.aspx#wlemails</cref>
         /// </see>
-        public static readonly MicrosoftScope Emails = new MicrosoftScope("wl.emails");
+        public static readonly WindowsLiveScope Emails = new WindowsLiveScope("wl.emails");
 
         #endregion
 

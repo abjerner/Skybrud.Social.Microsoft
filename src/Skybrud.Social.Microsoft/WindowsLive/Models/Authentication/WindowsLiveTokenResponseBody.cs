@@ -1,14 +1,15 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Social.Microsoft.Scopes;
+using Skybrud.Social.Microsoft.WindowsLive.Models;
+using Skybrud.Social.Microsoft.WindowsLive.Scopes;
 
-namespace Skybrud.Social.Microsoft.Models.Authentication {
+namespace Skybrud.Social.Microsoft.WindowsLive.Models.Authentication {
     
     /// <summary>
     /// Class representing the response body of a call to get a refresh token or an access token.
     /// </summary>
-    public class MicrosoftTokenResponseBody : MicrosoftObject {
+    public class WindowsLiveTokenResponseBody : WindowsLiveObject {
 
         #region Properties
 
@@ -25,7 +26,7 @@ namespace Skybrud.Social.Microsoft.Models.Authentication {
         /// <summary>
         /// Gets a collection of the scopes the user has granted.
         /// </summary>
-        public MicrosoftScopeCollection Scope { get; }
+        public WindowsLiveScopeCollection Scope { get; }
 
         /// <summary>
         /// Gets the access token.
@@ -56,12 +57,12 @@ namespace Skybrud.Social.Microsoft.Models.Authentication {
 
         #region Constructors
 
-        private MicrosoftTokenResponseBody(JObject obj) : base(obj) {
+        private WindowsLiveTokenResponseBody(JObject obj) : base(obj) {
 
             // Convert the "scope" string to a collection of scopes
-            Scope = new MicrosoftScopeCollection();
+            Scope = new WindowsLiveScopeCollection();
             foreach (string name in obj.GetString("scope").Split(' ')) {
-                MicrosoftScope scope = MicrosoftScope.GetScope(name) ?? MicrosoftScope.RegisterScope(name);
+                WindowsLiveScope scope = WindowsLiveScope.GetScope(name) ?? WindowsLiveScope.RegisterScope(name);
                 Scope.Add(scope);
             }
 
@@ -79,12 +80,12 @@ namespace Skybrud.Social.Microsoft.Models.Authentication {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="MicrosoftTokenResponseBody"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="WindowsLiveTokenResponseBody"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="MicrosoftTokenResponseBody"/>.</returns>
-        public static MicrosoftTokenResponseBody Parse(JObject obj) {
-            return obj == null ? null : new MicrosoftTokenResponseBody(obj);
+        /// <returns>An instance of <see cref="WindowsLiveTokenResponseBody"/>.</returns>
+        public static WindowsLiveTokenResponseBody Parse(JObject obj) {
+            return obj == null ? null : new WindowsLiveTokenResponseBody(obj);
         }
 
         #endregion

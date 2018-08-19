@@ -1,14 +1,13 @@
 ﻿using System;
 using Skybrud.Social.Http;
-using Skybrud.Social.Microsoft.Responses;
 using Skybrud.Social.Microsoft.WindowsLive.Models.Users;
 
-namespace Skybrud.Social.Microsoft.WindowsLive.Responses {
+namespace Skybrud.Social.Microsoft.WindowsLive.Responses.Users {
 
     /// <summary>
     /// Class representing the response of a call to get information about a single Windows Live user.
     /// </summary>
-    public class WindowsLiveGetUserResponse : MicrosoftResponse<WindowsLiveUser> {
+    public class WindowsLiveGetUserResponse : WindowsLiveResponse<WindowsLiveUser> {
 
         #region Constructors
 

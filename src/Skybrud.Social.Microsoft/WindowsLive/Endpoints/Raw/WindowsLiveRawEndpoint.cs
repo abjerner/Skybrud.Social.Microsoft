@@ -1,29 +1,29 @@
 ﻿using System;
 using Skybrud.Social.Http;
-using Skybrud.Social.Microsoft.OAuth;
+using Skybrud.Social.Microsoft.WindowsLive.OAuth;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw {
     
     /// <summary>
-    /// Raw implementation of the Windows Live endpoint.
+    /// Raw implementation of the Windows Live users endpoint.
     /// </summary>
     /// <see>
     ///     <cref>https://msdn.microsoft.com/en-us/library/hh826533.aspx#requesting_info_using_rest</cref>
     /// </see>
-    public class WindowsLiveRawEndpoint {
+    public class WindowsLiveUsersRawEndpoint {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public MicrosoftOAuthClient Client { get; }
+        public WindowsLiveOAuthClient Client { get; }
 
         #endregion
 
         #region Constructors
 
-        internal WindowsLiveRawEndpoint(MicrosoftOAuthClient client) {
+        internal WindowsLiveUsersRawEndpoint(WindowsLiveOAuthClient client) {
             Client = client;
         }
 

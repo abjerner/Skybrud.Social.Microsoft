@@ -1,21 +1,21 @@
-﻿using Skybrud.Social.Microsoft.OAuth;
-using Skybrud.Social.Microsoft.Responses.Authentication;
+﻿using System;
+using Skybrud.Social.Microsoft.WindowsLive.Responses.Authentication;
 using Skybrud.Social.Microsoft.WindowsLive.Endpoints;
-using System;
+using Skybrud.Social.Microsoft.WindowsLive.OAuth;
 
-namespace Skybrud.Social.Microsoft {
+namespace Skybrud.Social.Microsoft.WindowsLive {
 
     /// <summary>
-    /// Service implementation of the various Microsoft APIs.
+    /// Service implementation of the Windows Live API.
     /// </summary>
-    public class MicrosoftService {
+    public class WindowsLiveService {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the internal OAuth client.
         /// </summary>
-        public MicrosoftOAuthClient Client { get; }
+        public WindowsLiveOAuthClient Client { get; }
 
         /// <summary>
         /// Gets a reference to the Windows Live endpoint.
@@ -26,7 +26,7 @@ namespace Skybrud.Social.Microsoft {
 
         #region Constructors
 
-        private MicrosoftService(MicrosoftOAuthClient client) {
+        private WindowsLiveService(WindowsLiveOAuthClient client) {
             Client = client;
             WindowsLive = new WindowsLiveEndpoint(this);
         }
@@ -39,9 +39,9 @@ namespace Skybrud.Social.Microsoft {
         /// Initialize a new service instance from the specified OAuth client.
         /// </summary>
         /// <param name="client">The OAuth client.</param>
-        public static MicrosoftService CreateFromOAuthClient(MicrosoftOAuthClient client) {
+        public static WindowsLiveService CreateFromOAuthClient(WindowsLiveOAuthClient client) {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            return new MicrosoftService(client);
+            return new WindowsLiveService(client);
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace Skybrud.Social.Microsoft {
         /// token.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
-        public static MicrosoftService CreateFromAccessToken(string accessToken) {
+        public static WindowsLiveService CreateFromAccessToken(string accessToken) {
             if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
-            return CreateFromOAuthClient(new MicrosoftOAuthClient {
+            return CreateFromOAuthClient(new WindowsLiveOAuthClient {
                 AccessToken = accessToken
             });
         }
@@ -62,7 +62,7 @@ namespace Skybrud.Social.Microsoft {
         /// <param name="clientId">The client ID.</param>
         /// <param name="clientSecret">The client secret.</param>
         /// <param name="refreshToken">The refresh token of the user.</param>
-        public static MicrosoftService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
+        public static WindowsLiveService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
@@ -70,16 +70,16 @@ namespace Skybrud.Social.Microsoft {
             if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentNullException(nameof(refreshToken));
 
             // Initialize a new OAuth client
-            MicrosoftOAuthClient client = new MicrosoftOAuthClient(clientId, clientSecret);
+            WindowsLiveOAuthClient client = new WindowsLiveOAuthClient(clientId, clientSecret);
 
             // Get an access token from the refresh token.
-            MicrosoftTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
+            WindowsLiveTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
 
             // Update the OAuth client with the access token
             client.AccessToken = response.Body.AccessToken;
 
             // Initialize a new service instance
-            return new MicrosoftService(client);
+            return new WindowsLiveService(client);
 
         }
 

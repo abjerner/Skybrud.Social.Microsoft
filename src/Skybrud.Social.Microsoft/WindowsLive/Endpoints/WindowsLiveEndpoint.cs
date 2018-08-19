@@ -1,5 +1,6 @@
 ﻿using Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw;
 using Skybrud.Social.Microsoft.WindowsLive.Responses;
+using Skybrud.Social.Microsoft.WindowsLive.Responses.Users;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints {
     
@@ -13,18 +14,18 @@ namespace Skybrud.Social.Microsoft.WindowsLive.Endpoints {
         /// <summary>
         /// Gets a reference to the Microsoft service.
         /// </summary>
-        public MicrosoftService Service { get; }
+        public WindowsLiveService Service { get; }
 
         /// <summary>
         /// A reference to the raw endpoint.
         /// </summary>
-        public WindowsLiveRawEndpoint Raw => Service.Client.WindowsLive;
+        public WindowsLiveUsersRawEndpoint Raw => Service.Client.Users;
 
         #endregion
 
         #region Constructors
 
-        internal WindowsLiveEndpoint(MicrosoftService service) {
+        internal WindowsLiveEndpoint(WindowsLiveService service) {
             Service = service;
         }
 

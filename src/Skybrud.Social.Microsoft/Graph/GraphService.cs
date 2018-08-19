@@ -2,8 +2,6 @@
 using Skybrud.Social.Microsoft.Graph.Endpoints;
 using Skybrud.Social.Microsoft.Graph.OAuth;
 using Skybrud.Social.Microsoft.Graph.Responses.Authentication;
-using Skybrud.Social.Microsoft.OAuth;
-using Skybrud.Social.Microsoft.Responses.Authentication;
 
 namespace Skybrud.Social.Microsoft.Graph {
 

@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.Microsoft.Models;
 
 namespace Skybrud.Social.Microsoft.WindowsLive.Models.Users {
     
-    /// <summary>
-    /// Class representing a Windows Live user.
-    /// </summary>
-    public class WindowsLiveUser : MicrosoftObject {
+    public class WindowsLiveUser : WindowsLiveObject {
 
         #region Properties
 

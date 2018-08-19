@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Skybrud.Social.Microsoft.Scopes {
+namespace Skybrud.Social.Microsoft.WindowsLive.Scopes {
     
     /// <summary>
     /// Class representing a collection of scopes for the various Microsoft APIs.
     /// </summary>
-    public class MicrosoftScopeCollection {
+    public class WindowsLiveScopeCollection {
 
         #region Private fields
 
-        private readonly List<MicrosoftScope> _list = new List<MicrosoftScope>();
+        private readonly List<WindowsLiveScope> _list = new List<WindowsLiveScope>();
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// <summary>
         /// Gets an array of all the scopes added to the collection.
         /// </summary>
-        public MicrosoftScope[] Items => _list.ToArray();
+        public WindowsLiveScope[] Items => _list.ToArray();
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// Initializes a new collection based on the specified <paramref name="array"/> of scopes.
         /// </summary>
         /// <param name="array">Array of scopes.</param>
-        public MicrosoftScopeCollection(params MicrosoftScope[] array) {
+        public WindowsLiveScopeCollection(params WindowsLiveScope[] array) {
             _list.AddRange(array);
         }
 
@@ -42,15 +42,15 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// Adds the specified <paramref name="scope"/> to the collection.
         /// </summary>
         /// <param name="scope">The scope to be added.</param>
-        public void Add(MicrosoftScope scope) {
+        public void Add(WindowsLiveScope scope) {
             _list.Add(scope);
         }
 
         /// <summary>
         /// Returns an array of scopes based on the collection.
         /// </summary>
-        /// <returns>Array of <see cref="MicrosoftScope"/> contained in the location.</returns>
-        public MicrosoftScope[] ToArray() {
+        /// <returns>Array of <see cref="WindowsLiveScope"/> contained in the location.</returns>
+        public WindowsLiveScope[] ToArray() {
             return _list.ToArray();
         }
 
@@ -79,8 +79,8 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// </summary>
         /// <param name="scope">The scope the collection should be based on.</param>
         /// <returns>A new collection based on a single <paramref name="scope"/>.</returns>
-        public static implicit operator MicrosoftScopeCollection(MicrosoftScope scope) {
-            return new MicrosoftScopeCollection(scope);
+        public static implicit operator WindowsLiveScopeCollection(WindowsLiveScope scope) {
+            return new WindowsLiveScopeCollection(scope);
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// </summary>
         /// <param name="array">The array of scopes the collection should be based on.</param>
         /// <returns>A new collection based on an <paramref name="array"/> of scopes.</returns>
-        public static implicit operator MicrosoftScopeCollection(MicrosoftScope[] array) {
-            return new MicrosoftScopeCollection(array ?? new MicrosoftScope[0]);
+        public static implicit operator WindowsLiveScopeCollection(WindowsLiveScope[] array) {
+            return new WindowsLiveScopeCollection(array ?? new WindowsLiveScope[0]);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Skybrud.Social.Microsoft.Scopes {
         /// </summary>
         /// <param name="collection">The collection to which <paramref name="scope"/> will be added.</param>
         /// <param name="scope">The scope to be added to the <paramref name="collection"/>.</param>
-        public static MicrosoftScopeCollection operator +(MicrosoftScopeCollection collection, MicrosoftScope scope) {
+        public static WindowsLiveScopeCollection operator +(WindowsLiveScopeCollection collection, WindowsLiveScope scope) {
             collection.Add(scope);
             return collection;
         }

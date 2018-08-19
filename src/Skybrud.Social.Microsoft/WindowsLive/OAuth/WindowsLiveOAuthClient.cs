@@ -2,19 +2,16 @@
 using Skybrud.Essentials.Common;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
-using Skybrud.Social.Microsoft.Responses.Authentication;
-using Skybrud.Social.Microsoft.Scopes;
+using Skybrud.Social.Microsoft.WindowsLive.Responses.Authentication;
 using Skybrud.Social.Microsoft.WindowsLive.Endpoints.Raw;
+using Skybrud.Social.Microsoft.WindowsLive.Scopes;
 
-namespace Skybrud.Social.Microsoft.OAuth {
-    
-    /// <summary>
-    /// 
-    /// </summary>
+namespace Skybrud.Social.Microsoft.WindowsLive.OAuth {
+
     /// <see>
     ///     <cref>https://msdn.microsoft.com/en-us/library/hh243647.aspx</cref>
     /// </see>
-    public class MicrosoftOAuthClient : SocialHttpClient {
+    public class WindowsLiveOAuthClient : SocialHttpClient {
 
         #region Properties
 
@@ -45,9 +42,9 @@ namespace Skybrud.Social.Microsoft.OAuth {
         #region Endpoints
 
         /// <summary>
-        /// Gets a reference to the raw Windows Live endpoint.
+        /// Gets a reference to the raw users endpoint.
         /// </summary>
-        public WindowsLiveRawEndpoint WindowsLive { get; }
+        public WindowsLiveUsersRawEndpoint Users { get; }
 
         #endregion
 
@@ -58,15 +55,15 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <summary>
         /// Initializes an OAuth client with empty information.
         /// </summary>
-        public MicrosoftOAuthClient() {
-            WindowsLive = new WindowsLiveRawEndpoint(this);
+        public WindowsLiveOAuthClient() {
+            Users = new WindowsLiveUsersRawEndpoint(this);
         }
 
         /// <summary>
         /// Initializes an OAuth client with the specified <paramref name="accessToken"/>.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
-        public MicrosoftOAuthClient(string accessToken) : this() {
+        public WindowsLiveOAuthClient(string accessToken) : this() {
             if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
             AccessToken = accessToken;
         }
@@ -77,7 +74,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
-        public MicrosoftOAuthClient(string clientId, string clientSecret) : this() {
+        public WindowsLiveOAuthClient(string clientId, string clientSecret) : this() {
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
             if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
             ClientId = clientId;
@@ -91,7 +88,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
         /// <param name="redirectUri">The redirect URI of the client.</param>
-        public MicrosoftOAuthClient(string clientId, string clientSecret, string redirectUri) : this() {
+        public WindowsLiveOAuthClient(string clientId, string clientSecret, string redirectUri) : this() {
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentNullException(nameof(clientId));
             if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
             if (String.IsNullOrWhiteSpace(redirectUri)) throw new ArgumentNullException(nameof(redirectUri));
@@ -111,7 +108,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <param name="state">The state to send to the Microsoft OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
         /// <returns>An authorization URL based on <paramref name="state"/> and <paramref name="scope"/>.</returns>
-        public string GetAuthorizationUrl(string state, MicrosoftScopeCollection scope) {
+        public string GetAuthorizationUrl(string state, WindowsLiveScopeCollection scope) {
             if (scope == null) throw new ArgumentNullException(nameof(scope));
             return GetAuthorizationUrl(state, scope.ToString());
         }
@@ -156,8 +153,8 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// Exchanges the specified <paramref name="authorizationCode"/> for a refresh token and an access token.
         /// </summary>
         /// <param name="authorizationCode">The authorization code received from the Microsoft OAuth dialog.</param>
-        /// <returns>An instance of <see cref="MicrosoftTokenResponse"/> representing the response.</returns>
-        public MicrosoftTokenResponse GetAccessTokenFromAuthCode(string authorizationCode) {
+        /// <returns>An instance of <see cref="WindowsLiveTokenResponse"/> representing the response.</returns>
+        public WindowsLiveTokenResponse GetAccessTokenFromAuthCode(string authorizationCode) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
@@ -178,7 +175,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
 
             // Parse the response
-            return MicrosoftTokenResponse.ParseResponse(response);
+            return WindowsLiveTokenResponse.ParseResponse(response);
 
         }
 
@@ -186,8 +183,8 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// Gets a new access token from the specified <paramref name="refreshToken"/>.
         /// </summary>
         /// <param name="refreshToken">The refresh token of the user.</param>
-        /// <returns>An instance of <see cref="MicrosoftTokenResponse"/> representing the response.</returns>
-        public MicrosoftTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
+        /// <returns>An instance of <see cref="WindowsLiveTokenResponse"/> representing the response.</returns>
+        public WindowsLiveTokenResponse GetAccessTokenFromRefreshToken(string refreshToken) {
 
             // Some validation
             if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
@@ -208,7 +205,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
             SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://login.live.com/oauth20_token.srf", null, data);
 
             // Parse the response
-            return MicrosoftTokenResponse.ParseResponse(response);
+            return WindowsLiveTokenResponse.ParseResponse(response);
 
         }
 

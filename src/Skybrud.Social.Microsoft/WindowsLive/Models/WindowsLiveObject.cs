@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Skybrud.Social.Microsoft.Models {
+namespace Skybrud.Social.Microsoft.WindowsLive.Models {
 
     /// <summary>
-    /// Class representing a basic object from one of the Microsoft APIs derived from an instance of <see cref="JObject"/>.
+    /// Class representing a basic object from the Windows Live API derived from an instance of <see cref="JObject"/>.
     /// </summary>
-    public class MicrosoftObject {
+    public class WindowsLiveObject {
 
         #region Properties
 
@@ -24,7 +24,7 @@ namespace Skybrud.Social.Microsoft.Models {
         /// Initializes a new instance from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> representing the object.</param>
-        protected MicrosoftObject(JObject obj) {
+        protected WindowsLiveObject(JObject obj) {
             JObject = obj;
         }
 
